@@ -1,0 +1,29 @@
+#!/bin/bash
+#backs up a single project directory
+
+if [ $# != 1 ]
+then
+    echo Usage: A single argument which is the directory to backup
+    exit
+fi
+if [ ! -d ~/linuxtutorialwork/foo/$1 ]
+then
+    echo 'the given directory does not seem to exist (possible typo?)'
+    exit
+fi
+date=`date +%F`
+
+# do we already have a backup folder for today's date?
+if [ -d ~/linuxtutorialwork/foo2/$1_$date ]
+then
+    echo 'This proejct has already been backed up today, overwrite?'
+    read answer
+    if [ $answer != 'y' ]
+    then
+	exit
+    fi
+else
+    mkdir ~/linuxtutorialwork/foo2/$1_$date
+    fi
+cp -R ~/linuxtutorialwork/foo/$1 ~/linuxtutorialwork/foo2/$1_$date
+echo Backup of $1 completed
