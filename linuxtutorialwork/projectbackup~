@@ -1,7 +1,0 @@
-#!/bin/bash
-#backs up a single project directory
-
-date=`date +%F`
-mkdir ~/linuxtutorialwork/foo2/$1_$date
-cp -R ~/linuxtutorialwork/foo/$1 ~/linuxtutorialwork/foo2/$1_$date
-echo Backup of $1 completed
