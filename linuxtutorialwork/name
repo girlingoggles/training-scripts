@@ -1,0 +1,2 @@
+name=Lucy
+echo hello $name
