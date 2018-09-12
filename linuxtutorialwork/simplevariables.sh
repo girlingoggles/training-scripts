@@ -7,5 +7,5 @@ anothervar=Fred
 echo $myvariable $anothervar
 echo
 
-sampledir=/home/miru/Git/training-scripts/linuxtutorialwork/foo
+sampledir=foo
 ls $sampledir
