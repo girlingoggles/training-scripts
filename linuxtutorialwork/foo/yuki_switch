@@ -1,0 +1,64 @@
+#!/bin/bash
+#there's not really anything here
+#I did this so there's at least something in foo
+
+thing=Hello
+thing2=Goodbye
+thing3="See you soon!"
+# date= $ date
+
+echo "$thing"
+echo "what's your name?"
+read varname
+echo it\'s nice to meet you $varname
+
+read -p "What is your favorite number between 1 and 10?" answer
+
+case $answer in
+    1|2|3) echo "$answer is pretty low." ;;
+    4|5|6|7) echo "$answer is a good mid range." ;;
+    8|9|10) echo "$answer is high end." ;;
+    *)
+	echo "That's not what I asked for."
+	;;
+esac
+
+read -p "Are you leaving me? [y/n]" answer
+
+#case statements can work with only one option, but at that point it's better to just use a if statement
+case $answer in
+    y)
+	echo "$thing2"
+	exit
+	;;
+    n)
+	echo "So you're not leaving?"
+	exit
+	;;
+esac
+
+read -p "Do you like cake? [y/n]" answer3
+if [[ $answer3 = y ]] ; then
+    echo "The cake is a lie"
+    echo "$thing2"
+    exit
+else
+    echo "The cake is a lie anyway"
+    echo "Which do you like?"
+    read dessert
+    echo I like $dessert too!
+    read -p "Do you want to know something? [y/n]" answer4
+    if [[ $answer4 = y ]] ; then
+	echo "today is $(date '+%A %D') !"
+    else 
+	echo "I'm glad you stayed."
+	read -p "you should really go though. [y/n]" answer2
+	if [ $answer2 = y ] ; then
+	    echo "$thing3"
+	else
+	    echo "I promise I'll see you again, bye!"
+	    exit
+	fi
+    fi
+fi
+
