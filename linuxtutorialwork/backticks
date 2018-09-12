@@ -2,4 +2,4 @@
 #backticks save the output of a command to a variable
 
 lines=`cat $1 | wc -l`
-echo The number of lines in the file $2 is $lines
+echo The number of lines in the file $1 is $lines
