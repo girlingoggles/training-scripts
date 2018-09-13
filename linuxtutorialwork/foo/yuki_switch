@@ -2,6 +2,28 @@
 #there's not really anything here
 #I did this so there's at least something in foo
 
+function number_loop () {
+    errors=0
+    error_answer="Please return to your class. I hear you're learning how to count today!"
+    while [ 1 ]
+    do
+	read -p "What is your favourite number between 0 and 10?" answer
+	case $answer in
+	    1) echo "Because you're the best!" ; return 0 ;;
+	    2|4|6|8) echo "Even Steven?" ; return 0 ;;
+	    3|9) echo "You're an odd one, aren't you?" ; return 0 ;;
+	    5) echo "Right in the middle, best of both!" ; return 0 ;;
+	    0|10) echo "Of course YOU would choose such a fancy number" ; return 0 ;;
+	    7) echo "Feeling lucky, huh?" ; return 0 ;;
+            *) echo $error_answer ; ((errors++)) ;;
+	esac
+	if [ $errors -gt 3 ]
+	then error_answer="Are you even trying?" ;
+	fi
+    done
+}
+    
+
 thing=Hello
 thing2=Goodbye
 thing3="See you soon!"
@@ -11,30 +33,20 @@ echo "$thing"
 echo "what's your name?"
 read varname
 echo it\'s nice to meet you $varname
-
-read -p "What is your favorite number between 1 and 10?" answer
-
-case $answer in
-    1|2|3) echo "$answer is pretty low." ;;
-    4|5|6|7) echo "$answer is a good mid range." ;;
-    8|9|10) echo "$answer is high end." ;;
-    *)
-	echo "That's not what I asked for."
-	;;
-esac
-
+number_loop
+       
 read -p "Are you leaving me? [y/n]" answer
 
 #case statements can work with only one option, but at that point it's better to just use a if statement
 case $answer in
     y)
 	echo "$thing2"
-	exit
-	;;
+	exit ;;
     n)
 	echo "So you're not leaving?"
-	exit
 	;;
+    *)
+	echo "Only 'y' or 'n' please."
 esac
 
 read -p "Do you like cake? [y/n]" answer3
@@ -45,11 +57,25 @@ if [[ $answer3 = y ]] ; then
 else
     echo "The cake is a lie anyway"
     echo "Which do you like?"
-    read dessert
-    echo I like $dessert too!
+    read -p "Pie IceCream Cookies Candy" answer6
+    case $answer6 in
+	Pie)
+	    echo "Pie  is a fantastic choice!" ;;
+	IceCream)
+	    echo "IceCream is so cold!" ;;
+	Cookies)
+	    echo "Anzac, chocolate chip, coconut... There are so many!" ;;
+	Candy)
+	    echo "Too many varieties of sweets to list, too many to try!" ;;
+	*)
+	    echo "Is that a dessert?"  ;;
+    esac
+echo I like $answer6 too!
     read -p "Do you want to know something? [y/n]" answer4
     if [[ $answer4 = y ]] ; then
 	echo "today is $(date '+%A %D') !"
+	echo "Thanks for talking to me! Bye!"
+	exit
     else 
 	echo "I'm glad you stayed."
 	read -p "you should really go though. [y/n]" answer2
