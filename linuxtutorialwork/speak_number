@@ -1,30 +1,36 @@
 #!/bin/bash
-#Takes a one-digit number and echoes the word
 #Lucy S
+#Version 1: Takes a one-digit number and echoes the word
+#Version 2: Takes a one or two digit number and passes it to a function (speak_number_tens) which says the tens place (special for 10-19) and then sends the digit in the ones place through speak_number_ones.
 
+
+#change name of this function to speak_number_ones
 function speak_number () {
+    #good idea but lets not do an error numberator in this.
     errors=0
+    #while loop should not be here.
     while [ 1 ]
     do
         read -p "Please choose a one-digit number"  answer
-case $answer in
-1) echo "one" ; return 0 ;;
-2) echo "two" ; return 0 ;;
-3) echo "three" ; return 0 ;;
-4) echo "four" ; return 0 ;;
-5) echo "five" ; return 0 ;;
-6) echo "six" ; return 0 ;;
-7) echo "seven" ; return 0 ;;
-8) echo "eight" ; return 0 ;;
-9) echo "nine" ; return 0 ;;	
-0) echo "zero" ; return 0;;
-*) echo "That is not a one-digit number. Please try again." ; ((errors++)) ;;
-esac
-done
+	case $answer in
+	    1) echo "one" ; return 0 ;;
+	    2) echo "two" ; return 0 ;;
+	    3) echo "three" ; return 0 ;;
+	    4) echo "four" ; return 0 ;;
+	    5) echo "five" ; return 0 ;;
+	    6) echo "six" ; return 0 ;;
+	    7) echo "seven" ; return 0 ;;
+	    8) echo "eight" ; return 0 ;;
+	    9) echo "nine" ; return 0 ;;	
+	    0) echo "zero" ; return 0;;
+	    *) echo "That is not a one-digit number. Please try again." ; ((errors++)) ;;
+	esac
+    done
 }
 
 
 echo "Welcome!"
+#while loop could be used here. 
 speak_number
 echo "Thank you!"
 exit
