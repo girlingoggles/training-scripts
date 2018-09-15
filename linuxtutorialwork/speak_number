@@ -1,0 +1,30 @@
+#!/bin/bash
+#Takes a one-digit number and echoes the word
+#Lucy S
+
+function speak_number () {
+    errors=0
+    while [ 1 ]
+    do
+        read -p "Please choose a one-digit number"  answer
+case $answer in
+1) echo "one" ; return 0 ;;
+2) echo "two" ; return 0 ;;
+3) echo "three" ; return 0 ;;
+4) echo "four" ; return 0 ;;
+5) echo "five" ; return 0 ;;
+6) echo "six" ; return 0 ;;
+7) echo "seven" ; return 0 ;;
+8) echo "eight" ; return 0 ;;
+9) echo "nine" ; return 0 ;;	
+0) echo "zero" ; return 0;;
+*) echo "That is not a one-digit number. Please try again." ; ((errors++)) ;;
+esac
+done
+}
+
+
+echo "Welcome!"
+speak_number
+echo "Thank you!"
+exit
