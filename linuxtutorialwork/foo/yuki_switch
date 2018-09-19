@@ -48,13 +48,13 @@ echo "what's your name?"
 read varname
 echo it\'s nice to meet you $varname
 echo "Would you like to:"
-echo "have a chat"
+echo "chat"
 echo "math"
 echo "cake"
 echo "leave"
 read -p "Please choose one:" answer8
 case $answer8 in
-    havechat) have_chat ;;		
+    chat) have_chat ;;		
 		 math) number_loop ;;
 		 *) exit ;;
 		 esac
