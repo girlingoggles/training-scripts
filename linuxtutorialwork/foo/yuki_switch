@@ -17,12 +17,26 @@ function number_loop () {
 	    7) echo "Feeling lucky, huh?" ; return 0 ;;
             *) echo $error_answer ; ((errors++)) ;;
 	esac
-	if [ $errors -gt 3 ]
+	if [ $errors -eq 3 ]
 	then error_answer="Are you even trying?" ;
 	fi
+	if [ $errors -gt 4 ]
+	then error_answer="For the love of... Stop fucking with me, yea?" ;
+	     fi
     done
 }
-    
+function have_chat () {
+    while [ 1 ]
+    do
+	read -p "Do you want to know something? [y/n]" answer4
+	if [[ $answer4 = y ]] ; then
+	echo "today is $(date '+%A %D') !"
+	
+	echo "Thanks for talking to me! Bye!"
+	exit
+    fi
+    done
+}
 
 thing=Hello
 thing2=Goodbye
@@ -33,16 +47,25 @@ echo "$thing"
 echo "what's your name?"
 read varname
 echo it\'s nice to meet you $varname
-number_loop
-       
-read -p "Are you leaving me? [y/n]" answer
-
-#case statements can work with only one option, but at that point it's better to just use a if statement
-case $answer in
-    y)
-	echo "$thing2"
-	exit ;;
-    n)
+echo "Would you like to:"
+echo "have a chat"
+echo "math"
+echo "cake"
+echo "leave"
+read -p "Please choose one:" answer8
+case $answer8 in
+    havechat) have_chat ;;		
+		 math) number_loop ;;
+		 *) exit ;;
+		 esac
+		 read -p "Are you leaving me? [y/n]" answer
+		 
+		 #case statements can work with only one option, but at that point it's better to just use a if statement
+		 case $answer in
+		     y)
+			 echo "$thing2"
+			 exit ;;
+		     n)
 	echo "So you're not leaving?"
 	;;
     *)
@@ -71,20 +94,16 @@ else
 	    echo "Is that a dessert?"  ;;
     esac
 echo I like $answer6 too!
-    read -p "Do you want to know something? [y/n]" answer4
-    if [[ $answer4 = y ]] ; then
-	echo "today is $(date '+%A %D') !"
-	echo "Thanks for talking to me! Bye!"
-	exit
-    else 
-	echo "I'm glad you stayed."
-	read -p "you should really go though. [y/n]" answer2
-	if [ $answer2 = y ] ; then
-	    echo "$thing3"
-	else
-	    echo "I promise I'll see you again, bye!"
-	    exit
-	fi
-    fi
+
+#    else 
+#	echo "I'm glad you stayed."
+#	read -p "you should really go though. [y/n]" answer2
+#	if [ $answer2 = y ] ; then
+#	    echo "$thing3"
+#	else
+#	    echo "I promise I'll see you again, bye!"
+#	    exit
+#	fi
+ #   fi
 fi
 
