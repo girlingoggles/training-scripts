@@ -1,7 +1,8 @@
 #!/bin/bash
 #there's not really anything here
 #I did this so there's at least something in foo
-
+#You should functionize cake and leave, put a loop around the main menu, and add a yes_or_no funtion.
+#funtion yes_or_no should accept a string question, and prompt that string with read -p then return 1 for all forms of yes (y,ya,yep,yes) or 0 for all forms of no (n, no, nah)
 function number_loop () {
     errors=0
     error_answer="Please return to your class. I hear you're learning how to count today!"
@@ -22,19 +23,20 @@ function number_loop () {
 	fi
 	if [ $errors -gt 4 ]
 	then error_answer="For the love of... Stop fucking with me, yea?" ;
-	     fi
+	fi
     done
 }
+
 function have_chat () {
     while [ 1 ]
     do
 	read -p "Do you want to know something? [y/n]" answer4
 	if [[ $answer4 = y ]] ; then
-	echo "today is $(date '+%A %D') !"
-	
-	echo "Thanks for talking to me! Bye!"
-	exit
-    fi
+	    echo "today is $(date '+%A %D') !"
+	    echo "Thanks for talking to me! Bye!"
+	    # Should this be exit or return? Do you want her to go back to the "main menu" after she tells the date?
+	    exit
+	fi
     done
 }
 
@@ -47,25 +49,28 @@ echo "$thing"
 echo "what's your name?"
 read varname
 echo it\'s nice to meet you $varname
+#This would be the start of the "main menu"
 echo "Would you like to:"
 echo "chat"
 echo "math"
 echo "cake"
 echo "leave"
 read -p "Please choose one:" answer8
+
 case $answer8 in
     chat) have_chat ;;		
-		 math) number_loop ;;
-		 *) exit ;;
-		 esac
-		 read -p "Are you leaving me? [y/n]" answer
+    math) number_loop ;;
+    #no cake or leave option?
+    #should default mean leave, or reprompt?
+    *) exit ;;
+esac
+read -p "Are you leaving me? [y/n]" answer
 		 
-		 #case statements can work with only one option, but at that point it's better to just use a if statement
-		 case $answer in
-		     y)
-			 echo "$thing2"
-			 exit ;;
-		     n)
+case $answer in
+    ya)
+	echo "$thing2"
+	exit ;;
+    n)
 	echo "So you're not leaving?"
 	;;
     *)
