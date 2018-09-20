@@ -1,0 +1,25 @@
+#!/bin/bash
+#Words of fucking affirmation
+
+echo "All things are for the eventual best"
+read -n 1 -s -r -p " "
+echo "You've got this"
+read -n 1 -s -r -p " "
+echo "Focus on what you can do"
+echo "You can do anything"
+read -n 1 -s -r -p " "
+echo "You are Smaug"
+read -n 1 -srp " "
+echo "Hakuna Matata"
+echo "It means no worries"
+read -n 1 -srp " "
+echo "Being afraid of things going wrong isn't the way to make things go right"
+echo "You know this"
+read -n 1 -srp " "
+echo "Remember how far you've come, not just how far you have to go."
+echo "You are not where you want to be, but neither are you where you used to be"
+read -n 1 -srp " "
+echo "Pour yourself a drink, put on some lipstick, and pull yourself together"
+read -n 1 -srp " "
+echo "Go get em Smaug. Burn that fucker down."
+exit
