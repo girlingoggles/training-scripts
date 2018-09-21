@@ -2,12 +2,13 @@
 #This is Yuki. She's here to help.
 #Please be patient, she's learning.
 
-#You should functionize cake and leave, put a loop around the main menu, and add a yes_or_no funtion.
+#You should add a yes_or_no funtion.
 #funtion yes_or_no should accept a string question, and prompt that string with read -p then return 1 for all forms of yes (y,ya,yep,yes) or 0 for all forms of no (n, no, nah)
 
 
 function main_menu () {
-all_done=0
+    #is there a reason to have this as a variable? Will it get changed anywhere?
+    all_done=0
     while (( !all_done )); do
     echo "Would you like to:"
 echo "chat"
@@ -15,15 +16,14 @@ echo "affirmation"
 echo "math"
 echo "cake"
 echo "leave"
-read -p "Please choose one:" answer8
+read -p "Please choose one:" answer
 
-case $answer8 in
+case $answer in
     chat) have_chat ;;		
     math) number_loop ;;
     affirmation) affirmation ;;
     cake) cake ;;
     leave) leave ;;
-    #should default mean leave, or reprompt?
     *) echo "try again" ;;
 esac
     done
@@ -45,24 +45,25 @@ function number_loop () {
 	    7) echo "Feeling lucky, huh?" ; return 0 ;;
             *) echo $error_answer ; ((errors++)) ;;
 	esac
+	#so "Are you even trying?" should only appear once?
 	if [ $errors -eq 3 ]
 	then error_answer="Are you even trying?" ;
 	fi
+	#This should probebly be -eq no point in re-assigning $error_answer each time
 	if [ $errors -gt 4 ]
 	then error_answer="For the love of... Stop fucking with me, yea?" ;
 	fi
     done
-#add more error messages
 }
 
 function have_chat () {
     while [ 1 ]
     do
-	read -p "Do you want to know something? [y/n]" answer4
-	if [[ $answer4 = y ]] ; then
+	read -p "Do you want to know something? [y/n]" answer
+	if [[ $answer = y ]] ; then
 	    echo "today is $(date '+%A %D') !"
+	    #should she say bye if she still talking to them in the main menu?
 	    echo "Thanks for talking to me! Bye!"
-	    # Should this be exit or return? Do you want her to go back to the "main menu" after she tells the date?
 	   return 
 	fi
     done
@@ -70,6 +71,7 @@ function have_chat () {
 
 function affirmation () {
     echo "All things are for the eventual best"
+    #You should use consistant use of flags. (either all of them use "-s -r -p" or all use "-srp")
     read -n 1 -s -r -p " "
     echo "You've got this"
     read -n 1 -s -r -p " "
@@ -90,16 +92,17 @@ be"
     }
 
 function cake () {
-read -p "Do you like cake? [y/n]" answer3
-if [[ $answer3 = y ]] ; then
+read -p "Do you like cake? [y/n]" answer
+if [[ $answer = y ]] ; then
     echo "The cake is a lie"
     echo "$thing2"
+    #should this exit or return?
     exit
 else
     echo "The cake is a lie anyway"
     echo "Which do you like?"
-    read -p "Pie IceCream Cookies Candy" answer6
-    case $answer6 in
+    read -p "Pie IceCream Cookies Candy" answer
+    case $answer in
 	Pie)
 	    echo "Pie  is a fantastic choice!" ;;
 	IceCream)
@@ -111,6 +114,7 @@ else
 	*)
 	    echo "Is that a dessert?"  ;;
     esac
+    # it asks this even if it triggers "Is that a dessert?"
     echo I like $answer6 too!
 fi
 return
@@ -126,6 +130,7 @@ function leave () {
     fi
     }
 
+#these should be hard-coded now.
 thing=Hello
 thing2=Goodbye
 thing3="See you soon!"
@@ -135,9 +140,10 @@ echo "$thing"
 echo "My name is Yuki. I'm here to help"
 echo "what's your name?"
 read varname
+#it would be best to quote this.
 echo it\'s nice to meet you $varname
-#This would be the start of the "main menu"
 main_menu
+#The code will never reach this point.
 read -p "Are you leaving me? [y/n]" answer
 		 
 case $answer in
