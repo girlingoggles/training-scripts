@@ -7,25 +7,24 @@
 
 
 function main_menu () {
-    #is there a reason to have this as a variable? Will it get changed anywhere?
     all_done=0
     while (( !all_done )); do
-    echo "Would you like to:"
-echo "chat"
-echo "affirmation"
-echo "math"
-echo "cake"
-echo "leave"
-read -p "Please choose one:" answer
-
-case $answer in
-    chat) have_chat ;;		
-    math) number_loop ;;
-    affirmation) affirmation ;;
-    cake) cake ;;
-    leave) leave ;;
-    *) echo "try again" ;;
-esac
+	echo "Would you like to:"
+	echo "chat"
+	echo "affirmation"
+	echo "math"
+	echo "cake"
+	echo "leave"
+	read -p "Please choose one:" answer
+	
+	case $answer in
+	    chat) have_chat ;;		
+	    math) number_loop ;;
+	    affirmation) affirmation ;;
+	    cake) cake ;;
+	    leave) leave ;;
+	    *) echo "try again" ;;
+	esac
     done
     
 }
@@ -63,7 +62,7 @@ function have_chat () {
 	if [[ $answer = y ]] ; then
 	    echo "today is $(date '+%A %D') !"
 	    #should she say bye if she still talking to them in the main menu?
-	    echo "Thanks for talking to me! Bye!"
+	    echo "Thanks for talking to me!"
 	   return 
 	fi
     done
@@ -71,13 +70,13 @@ function have_chat () {
 
 function affirmation () {
     echo "All things are for the eventual best"
-    #You should use consistant use of flags. (either all of them use "-s -r -p" or all use "-srp")
-    read -n 1 -s -r -p " "
+   #flags fixed They were a test cause I wasn't 100% sure they'd work as one set
+    read -n 1 -srp " "
     echo "You've got this"
-    read -n 1 -s -r -p " "
+    read -n 1 -srp " "
     echo "Focus on what you can do"
     echo " You can do anything"
-    read -n 1 -s -r -p " "
+    read -n 1 -srp " "
     echo "You are Smaug"
     read -n 1 -srp " "
     echo "Hakuna Matata"
@@ -97,19 +96,19 @@ if [[ $answer = y ]] ; then
     echo "The cake is a lie"
     echo "$thing2"
     #should this exit or return?
-    exit
+    return main_menu 
 else
     echo "The cake is a lie anyway"
     echo "Which do you like?"
     read -p "Pie IceCream Cookies Candy" answer
     case $answer in
-	Pie)
+	Pie | pie)
 	    echo "Pie  is a fantastic choice!" ;;
-	IceCream)
+	Ice | Cream | ice | cream | IceCream | icecream)
 	    echo "IceCream is so cold!" ;;
-	Cookies)
+	Cookies | cookies)
 	    echo "Anzac, chocolate chip, coconut... There are so many!" ;;
-	Candy)
+	Candy | candy)
 	    echo "Too many varieties of sweets to list, too many to try!" ;;
 	*)
 	    echo "Is that a dessert?"  ;;
@@ -136,18 +135,19 @@ thing2=Goodbye
 thing3="See you soon!"
 # date= $ date
 
-echo "$thing"
+echo "Hello"
 echo "My name is Yuki. I'm here to help"
 echo "what's your name?"
-read varname
+read $varname
 #it would be best to quote this.
-echo it\'s nice to meet you $varname
+echo "it's nice to meet you $varname"
 main_menu
 #The code will never reach this point.
+
 read -p "Are you leaving me? [y/n]" answer
 		 
 case $answer in
-    ya)
+    y | Y | yes | Yes | Yea | yea | Yeah | yeah | yep | Yep | yup | Yup)
 	echo "$thing2"
 	exit ;;
     n)
