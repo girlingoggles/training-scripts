@@ -1,8 +1,35 @@
 #!/bin/bash
-#there's not really anything here
-#I did this so there's at least something in foo
+#This is Yuki. She's here to help.
+#Please be patient, she's learning.
+
 #You should functionize cake and leave, put a loop around the main menu, and add a yes_or_no funtion.
 #funtion yes_or_no should accept a string question, and prompt that string with read -p then return 1 for all forms of yes (y,ya,yep,yes) or 0 for all forms of no (n, no, nah)
+
+
+function main_menu () {
+all_done=0
+    while (( !all_done )); do
+    echo "Would you like to:"
+echo "chat"
+echo "affirmation"
+echo "math"
+echo "cake"
+echo "leave"
+read -p "Please choose one:" answer8
+
+case $answer8 in
+    chat) have_chat ;;		
+    math) number_loop ;;
+    affirmation) affirmation ;;
+    cake) cake ;;
+    leave) leave ;;
+    #should default mean leave, or reprompt?
+    *) echo "try again" ;;
+esac
+    done
+    
+}
+
 function number_loop () {
     errors=0
     error_answer="Please return to your class. I hear you're learning how to count today!"
@@ -25,6 +52,7 @@ function number_loop () {
 	then error_answer="For the love of... Stop fucking with me, yea?" ;
 	fi
     done
+#add more error messages
 }
 
 function have_chat () {
@@ -104,28 +132,12 @@ thing3="See you soon!"
 # date= $ date
 
 echo "$thing"
+echo "My name is Yuki. I'm here to help"
 echo "what's your name?"
 read varname
 echo it\'s nice to meet you $varname
 #This would be the start of the "main menu"
-echo "Would you like to:"
-echo "chat"
-echo "affirmation"
-echo "math"
-echo "cake"
-echo "leave"
-read -p "Please choose one:" answer8
-
-case $answer8 in
-    chat) have_chat ;;		
-    math) number_loop ;;
-    affirmation) affirmation ;;
-    cake) cake ;;
-    leave) leave ;;
-    #no cake or leave option?
-    #should default mean leave, or reprompt?
-    *) exit ;;
-esac
+main_menu
 read -p "Are you leaving me? [y/n]" answer
 		 
 case $answer in
@@ -138,7 +150,6 @@ case $answer in
     *)
 	echo "Only 'y' or 'n' please."
 esac
-
 
 
 #    else 
