@@ -1,3 +1,5 @@
+!Rename yuki to yuki.sh
+
 PROJECTS:
 	1: Yuki
 	   make a python yuki.py

@@ -61,7 +61,6 @@ function have_chat () {
 	read -p "Do you want to know something? [y/n]" answer
 	if [[ $answer = y ]] ; then
 	    echo "today is $(date '+%A %D') !"
-	    #should she say bye if she still talking to them in the main menu?
 	    echo "Thanks for talking to me!"
 	   return 
 	fi
@@ -70,7 +69,6 @@ function have_chat () {
 
 function affirmation () {
     echo "All things are for the eventual best"
-   #flags fixed They were a test cause I wasn't 100% sure they'd work as one set
     read -n 1 -srp " "
     echo "You've got this"
     read -n 1 -srp " "
@@ -91,11 +89,12 @@ be"
     }
 
 function cake () {
-read -p "Do you like cake? [y/n]" answer
+    #TAbbbsss TAAAABBSSSSS
+    read -p "Do you like cake? [y/n]" answer
 if [[ $answer = y ]] ; then
     echo "The cake is a lie"
+    #this should be hard-coded.
     echo "$thing2"
-    #should this exit or return?
     return main_menu 
 else
     echo "The cake is a lie anyway"
@@ -113,7 +112,7 @@ else
 	*)
 	    echo "Is that a dessert?"  ;;
     esac
-    # it asks this even if it triggers "Is that a dessert?"
+    # it says this even if it triggers "Is that a dessert?" Also, should be quoted.
     echo I like $answer6 too!
 fi
 return
@@ -125,11 +124,12 @@ function leave () {
     read -p "Must you? (y/n)" answer
     if [[ $answer = y ]] ; then
 	exit
+	# Technically, you don't have to (and probebly best not to) return or have an else. the end of a function is interperted as a return.
     else return 
     fi
-    }
+}
 
-#these should be hard-coded now.
+#these should be hard-coded and removed.
 thing=Hello
 thing2=Goodbye
 thing3="See you soon!"
@@ -137,17 +137,19 @@ thing3="See you soon!"
 
 echo "Hello"
 echo "My name is Yuki. I'm here to help"
+#for best coding practice this should be the same as the others ie: read -p "what's yout name? " answer
 echo "what's your name?"
 read $varname
-#it would be best to quote this.
 echo "it's nice to meet you $varname"
 main_menu
-#The code will never reach this point.
+#The code will never reach this point (or anything below it).
 
+#what's below should be esntally the yes_or_no function (with some changes)
 read -p "Are you leaving me? [y/n]" answer
 		 
 case $answer in
     y | Y | yes | Yes | Yea | yea | Yeah | yeah | yep | Yep | yup | Yup)
+	#this should be hard-coded.
 	echo "$thing2"
 	exit ;;
     n)
