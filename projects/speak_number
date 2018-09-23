@@ -6,7 +6,9 @@
 
 
 function speak_number_ones  () {
-read answer
+# you should not be reading the answer outside of the main section
+    read answer
+    #the case in speak_number_one should assume it has been given a 1 digit not 2 digit number
     case ${answer:1} in
 	?1) echo "one" ;;
 	?2) echo "two" ;;
@@ -22,9 +24,12 @@ read answer
     esac
 }
 function speak_number_tens () {
+    #reads should one be in the main section
     read -p "please type a number between 0 and 100" answer
-echo ${answer:0:1}
+    
+    echo ${answer:0:1}
     case $answer in
+	# 1? should be a special case. there is no such thing as "ten one", "ten two"
 	1?) echo "ten " ;;
 	2?) echo "twenty " ;;
 	3?) echo "thirty " ;;
@@ -35,14 +40,19 @@ echo ${answer:0:1}
 	8?) echo "eighty" ;;
 	9?) echo "ninety" ;;
     esac
+    #you should be passing the second digit to speak_number_ones, this passes nothing to it.
     speak_number_ones 
     return
 }
 
+#main section
 echo "Welcome!"
+#should not be a while loop.
 while [ 1 ]
-do    
+do
+    #should do read here and then pass input to speak_number_tens
     speak_number_tens
 echo "Thank you!"
 done
+#exit at the end of the function is redundent
 exit
