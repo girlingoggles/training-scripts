@@ -4,39 +4,45 @@
 #Version 2: Takes a one or two digit number and passes it to a function (speak_number_tens) which says the tens place (special for 10-19) and then sends the digit in the ones place through speak_number_ones.
 
 
-#change name of this function to speak_number_ones
+
 function speak_number_ones  () {
-    #good idea but lets not do an error numberator in this.
-    #error=0
-    #while loop should not be here.
-        read -p "Please choose a one-digit number"  answer
-	case $answer in
-	    ?1) echo "one" ; return 0 ;;
-	    ?2) echo "two" ; return 0 ;;
-	    ?3) echo "three" ; return 0 ;;
-	    ?4) echo "four" ; return 0 ;;
-	    ?5) echo "five" ; return 0 ;;
-	    ?6) echo "six" ; return 0 ;;
-	    ?7) echo "seven" ; return 0 ;;
-	    ?8) echo "eight" ; return 0 ;;
-	    ?9) echo "nine" ; return 0 ;;	
-	    ?0) echo "zero" ; return 0;;
-	    *) echo "That is not a one-digit number. Please try again." ; ((errors++)) ;;
-	esac
+read answer
+    case ${answer:1} in
+	?1) echo "one" ;;
+	?2) echo "two" ;;
+	?3) echo "three" ;;
+	?4) echo "four" ;;
+	?5) echo "five" ;;
+	?6) echo "six" ;;
+	    ?7) echo "seven" ;;
+	    ?8) echo "eight" ;;
+	    ?9) echo "nine" ;;	
+	    ?0) echo "zero" ;;
+	    *) echo "That is not a two-digit number. Please try again." ; return ;;
+    esac
 }
 function speak_number_tens () {
     read -p "please type a number between 0 and 100" answer
-case $answer in
-    1?) echo "ten" ;;
-2?) echo "twenty" ;;
-3?) echo "thirty" ;;
-
-esac
-speak_number_ones
+echo ${answer:0:1}
+    case $answer in
+	1?) echo "ten " ;;
+	2?) echo "twenty " ;;
+	3?) echo "thirty " ;;
+	4?) echo "fourty" ;;
+	5?) echo "fifty" ;;
+	6?) echo "sixty" ;;
+	7?) echo "seventy" ;;
+	8?) echo "eighty" ;;
+	9?) echo "ninety" ;;
+    esac
+    speak_number_ones 
+    return
 }
 
 echo "Welcome!"
-#while loop could be used here. 
-speak_number_tens speak_number_ones
+while [ 1 ]
+do    
+    speak_number_tens
 echo "Thank you!"
+done
 exit
