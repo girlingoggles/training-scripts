@@ -6,8 +6,8 @@
 
 
 function speak_number_ones  () {
-# you should not be reading the answer outside of the main section
-    #the case in speak_number_one should assume it has been given a 1 digit not 2 digit number
+
+    # The case in speak_number_one should assume it has been given a 1 digit not 2 digit number
     case $answer in
 	*1) echo "one" ;;
 	*2) echo "two" ;;
@@ -37,7 +37,8 @@ function speak_number_teens () {
 }
 
 function speak_number_tens () {
-tens='expr $answer / 10' 
+    #This is good, but your not actually using $tens yet
+    tens='expr $answer / 10' 
     case $answer in
 	1?) speak_number_teens ; return ;;
 	2?) echo -n "twenty " ;;
@@ -50,16 +51,17 @@ tens='expr $answer / 10'
 	9?) echo -n "ninety " ;;
     esac
     speak_number_ones
+    #empty return at the end of a function is not needed.
     return
 }
 
 function main () {
-echo "Welcome!"
-     read -p $'please type a number between 0 and 100 \n' answer
-    #should do read here and then pass input to speak_number_tens
+    echo "Welcome!"
+    read -p $'please type a number between 0 and 100 \n' answer
+    #should pass input to speak_number_tens rather then having it in answer
     speak_number_tens
-echo "Thank you!"
+    echo "Thank you!"
 }
 
 main
-#exit at the end of the function is redundent
+
