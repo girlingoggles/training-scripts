@@ -23,23 +23,23 @@ function speak_number_ones  () {
 
 function speak_number_teens () {
     case $answer in
-	10) echo -n "ten" ;;
-	11) echo -n "eleven" ;;
-	12) echo -n "twelve" ;;
-	13) echo -n "thirteen" ;;
-	14) echo -n "fourteen" ;;
-	15) echo -n "fifteen" ;;
-	16) echo -n "sixteen" ;;
-	17) echo -n "seventeen" ;;
-	18) echo -n "eighteen" ;;
-	19) echo -n "nineteen" ;;
+	10) echo -ne "ten \n" ;;
+	11) echo -ne "eleven \n" ;;
+	12) echo -ne "twelve \n" ;;
+	13) echo -ne "thirteen \n" ;;
+	14) echo -ne "fourteen \n" ;;
+	15) echo -ne "fifteen \n" ;;
+	16) echo -ne "sixteen \n" ;;
+	17) echo -ne "seventeen \n" ;;
+	18) echo -ne "eighteen \n" ;;
+	19) echo -ne "nineteen \n" ;;
     esac
 }
 
 function speak_number_tens () {
 tens='expr $answer / 10' 
     case $answer in
-	1?) speak_numbers_teens $answer ; return ;;
+	1?) speak_number_teens ; return ;;
 	2?) echo -n "twenty " ;;
 	3?) echo -n "thirty " ;;
 	4?) echo -n "fourty " ;;
@@ -55,7 +55,7 @@ tens='expr $answer / 10'
 
 function main () {
 echo "Welcome!"
-     read -p "please type a number between 0 and 100" answer
+     read -p $'please type a number between 0 and 100 \n' answer
     #should do read here and then pass input to speak_number_tens
     speak_number_tens
 echo "Thank you!"
