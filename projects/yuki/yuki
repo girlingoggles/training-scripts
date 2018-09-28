@@ -74,20 +74,17 @@ function number_loop () {
 }
 
 function have_chat () {
-    while [ 1 ]
-    do
-	echo "do you want to know something?"
-	yes_no
-	if [[ $? = 1 ]] ; then
-	    echo "today is $(date '+%A %D') !"
-	    echo "Thanks for talking to me!"
-	    echo " "
-	    return
-	else echo "Well, that went well."
-	     echo " "
-	     return
-	fi
-    done
+    echo "do you want to know something?"
+    yes_no
+    if [[ $? = 1 ]] ; then
+	echo "today is $(date '+%A %D') !"
+	echo "Thanks for talking to me!"
+	echo " "
+	return
+    else echo "Well, that went well."
+	 echo " "
+	 return
+    fi
 }
 
 function affirmation () {
@@ -114,11 +111,10 @@ be"
 function cake () {
     echo "Do you like cake?"
     yes_no
-    if [[ $? = 1 ]] ; then
+    if [[ $? == 1 ]] ; then
 	echo "The cake is a lie"
 	echo "But you already knew that"
 	echo " "
-	main_menu 
     else
 	echo "The cake is a lie anyway"
 	echo "Which do you like?"
@@ -136,15 +132,14 @@ function cake () {
 		echo "Is that a dessert?"  ;;
 	esac
 	# it says this even if it triggers "Is that a dessert?" Also, should be quoted.
-	if [[ $answer = * ]] ; then
+	if [[ $answer == * ]] ; then
 	    echo "I'll have to look into this"
 	    echo " "
 	else
-	    echo "I like $answer6 too!"
+	    echo "I like $answer too!"
 	    echo " "
 	fi
     fi
-    return
 }
 
 function music () {
@@ -179,7 +174,7 @@ function leave () {
     else echo "I'm glad you can stay with me for a little longer."
 	 echo "what would you like to do now?"
 	 echo " "
-	 return 
+	 return
     fi
 }
 
