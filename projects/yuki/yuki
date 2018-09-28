@@ -6,6 +6,20 @@
 #funtion yes_or_no should accept a string question, and prompt that string with read -p then return 1 for all forms of yes (y,ya,yep,yes) or 0 for all forms of no (n, no, nah)
 
 
+function yes_no () {
+    all_done=0
+    while (( !all_done)); do
+	read yn
+    case $yn in
+    	 y | Y | yes | Yes | Yea | yea | Yeah | yeah | yep | Yep | yup | Yup | ya | Ya) return 1 ;; 
+    	n | N | no | No | nah | Nah | nope | Nope | Na | na) return 0 ;;
+     esac
+     
+     echo "not a valid response"
+    done
+}
+
+
 function main_menu () {
     all_done=0
     while (( !all_done )); do
@@ -62,13 +76,14 @@ function number_loop () {
 function have_chat () {
     while [ 1 ]
     do
-	read -p "Do you want to know something? [y/n]" answer
-	if [[ $answer = y ]] ; then
+	echo "do you want to know something?"
+	yes_no
+	if [[ $? = 1 ]] ; then
 	    echo "today is $(date '+%A %D') !"
 	    echo "Thanks for talking to me!"
 	    echo " "
 	    return
-	else echo "That went well."
+	else echo "Well, that went well."
 	     echo " "
 	     return
 	fi
@@ -97,12 +112,13 @@ be"
     }
 
 function cake () {
-    read -p "Do you like cake? [y/n]" answer
-    if [[ $answer = y ]] ; then
+    echo "Do you like cake?"
+    yes_no
+    if [[ $? = 1 ]] ; then
 	echo "The cake is a lie"
 	echo "But you already knew that"
 	echo " "
-	return main_menu 
+	main_menu 
     else
 	echo "The cake is a lie anyway"
 	echo "Which do you like?"
@@ -155,8 +171,9 @@ function music () {
 function leave () {
     echo "It will be lonely without you here."
     echo "but if you must..."
-    read -p "Must you?" yes_no
-    if [[ $yn = 0 ]] ; then
+    echo "Must you?"
+    yes_no
+    if [[ $? = 1 ]] ; then
 	echo "Goodbye then. Thank you for stopping by."
 	exit
     else echo "I'm glad you can stay with me for a little longer."
@@ -166,13 +183,7 @@ function leave () {
     fi
 }
 
-function yes_no () {
-    yn=0
-    case $yn in
-	y | Y | yes | Yes | Yea | yea | Yeah | yeah | yep | Yep | yup | Yup | ya | Ya) return 0 ;; 
-	n | N | no | No | nah | Nah | nope | Nope | Na | na) return 1 ;;
-    esac
-   }
+
 
 #thing3="See you soon!"
 
