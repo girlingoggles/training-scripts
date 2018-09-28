@@ -14,15 +14,17 @@ function main_menu () {
 	echo "affirmation"
 	echo "math"
 	echo "cake"
+	echo "music"
 	echo "leave"
 	read -p "Please choose one:" answer
 	
 	case $answer in
-	    chat) have_chat ;;		
-	    math) number_loop ;;
-	    affirmation) affirmation ;;
-	    cake) cake ;;
-	    leave) leave ;;
+	    Chat | chat) have_chat ;;		
+	    Math | math) number_loop ;;
+	    Affirmation | affirmation) affirmation ;;
+	    Cake | cake) cake ;;
+	    Music | music) music ;;
+	    Leave | leave) leave ;;
 	    *) echo "try again" ;;
 	esac
     done
@@ -44,14 +46,16 @@ function number_loop () {
 	    7) echo "Feeling lucky, huh?" ; return 0 ;;
             *) echo $error_answer ; ((errors++)) ;;
 	esac
-	#so "Are you even trying?" should only appear once?
 	if [ $errors -eq 3 ]
 	then error_answer="Are you even trying?" ;
 	fi
-	#This should probebly be -eq no point in re-assigning $error_answer each time
-	if [ $errors -gt 4 ]
+   	if [ $errors -eq 4 ]
 	then error_answer="For the love of... Stop fucking with me, yea?" ;
 	fi
+	if [ $errors -eq 6 ]
+	then error_answer="This is annoying now. Stop it." ;
+	fi
+	echo " "
     done
 }
 
@@ -62,7 +66,11 @@ function have_chat () {
 	if [[ $answer = y ]] ; then
 	    echo "today is $(date '+%A %D') !"
 	    echo "Thanks for talking to me!"
-	   return 
+	    echo " "
+	    return
+	else echo "That went well."
+	     echo " "
+	     return
 	fi
     done
 }
@@ -85,15 +93,15 @@ function affirmation () {
     read -n 1 -srp " "
     echo "Remember how far you've come, not just how far you have to go. \n You are not where you want to be, but neither are you where you used to \
 be"
-   
+    echo " "
     }
 
 function cake () {
-    #TAbbbsss TAAAABBSSSSS
     read -p "Do you like cake? [y/n]" answer
     if [[ $answer = y ]] ; then
 	echo "The cake is a lie"
 	echo "But you already knew that"
+	echo " "
 	return main_menu 
     else
 	echo "The cake is a lie anyway"
@@ -114,26 +122,59 @@ function cake () {
 	# it says this even if it triggers "Is that a dessert?" Also, should be quoted.
 	if [[ $answer = * ]] ; then
 	    echo "I'll have to look into this"
+	    echo " "
 	else
-		echo I like $answer6 too!
+	    echo "I like $answer6 too!"
+	    echo " "
 	fi
     fi
     return
 }
 
+function music () {
+    echo "lofi"
+    echo "trance"
+    echo "dubstep"
+    echo "ghibli"
+    echo "samurai"
+    echo "violin"
+    read -p "I want:" answer
+    case $answer in
+	lofi) xdg-open https://www.youtube.com/watch?v=dJhW1J6gIWA&t=766s ;;
+	trance) xdg-open https://www.youtube.com/watch?v=buqNTkjTY20 ;;
+	dubstep) xdg-open https://www.youtube.com/watch?v=a41icW_FtsI ;;
+        ghibli) xdg-open https://www.youtube.com/watch?v=YjohMzHkBqI ;;
+	samurai) xdg-open https://www.youtube.com/watch?v=jrTMMG0zJyI ;;
+	violin) xdg-open https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RDEMzT1XwmFnIup_KYXuc2rUZA
+    esac
+    echo "Enjoy!"
+    echo " "
+    return
+    }
+
 function leave () {
     echo "It will be lonely without you here."
     echo "but if you must..."
-    read -p "Must you? (y/n)" answer
-    if [[ $answer = y ]] ; then
+    read -p "Must you?" yes_no
+    if [[ $yn = 0 ]] ; then
 	echo "Goodbye then. Thank you for stopping by."
 	exit
     else echo "I'm glad you can stay with me for a little longer."
+	 echo "what would you like to do now?"
+	 echo " "
 	 return 
     fi
 }
 
-thing3="See you soon!"
+function yes_no () {
+    yn=0
+    case $yn in
+	y | Y | yes | Yes | Yea | yea | Yeah | yeah | yep | Yep | yup | Yup | ya | Ya) return 0 ;; 
+	n | N | no | No | nah | Nah | nope | Nope | Na | na) return 1 ;;
+    esac
+   }
+
+#thing3="See you soon!"
 
 echo "Hello"
 echo "My name is Yuki. I'm here to help"
