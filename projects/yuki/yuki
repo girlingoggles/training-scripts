@@ -11,12 +11,12 @@ function yes_no () {
     while (( !all_done)); do
 	echo -n $@
 	read yn
-    case $yn in
-    	 y | Y | yes | Yes | Yea | yea | Yeah | yeah | yep | Yep | yup | Yup | ya | Ya) return 1 ;; 
-    	n | N | no | No | nah | Nah | nope | Nope | Na | na) return 0 ;;
-     esac
-     
-     echo "yes or no only, please"
+	case $yn in
+    	    y | Y | yes | Yes | Yea | yea | Yeah | yeah | yep | Yep | yup | Yup | ya | Ya) return 1 ;; 
+    	    n | N | no | No | nah | Nah | nope | Nope | Na | na) return 0 ;;
+	esac
+	
+	echo "yes or no only, please"
     done
 }
 
@@ -106,7 +106,7 @@ function affirmation () {
     echo "Remember how far you've come, not just how far you have to go. \n You are not where you want to be, but neither are you where you used to \
 be"
     echo " "
-    }
+}
 
 function cake () {
     yes_no "Do you like cake?"
@@ -160,8 +160,7 @@ function music () {
     esac
     echo "Enjoy!"
     echo " "
-    return
-    }
+}
 
 function leave () {
     echo "It will be lonely without you here."
@@ -190,7 +189,7 @@ main_menu
 
 #what's below should be esntally the yes_or_no function (with some changes)
 read -p "Are you leaving me? [y/n]" answer
-		 
+
 case $answer in
     y | Y | yes | Yes | Yea | yea | Yeah | yeah | yep | Yep | yup | Yup)
 	echo "Goodbye"
@@ -212,4 +211,4 @@ esac
 #	    echo "I promise I'll see you again, bye!"
 #	    exit
 #	fi
- #   fi
+#   fi
