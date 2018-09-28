@@ -76,14 +76,13 @@ function number_loop () {
 
 function have_chat () {
     yes_no "Do you want to know something?"
-    if [[ $? = 1 ]] ; then
+    if [[ $? == 1 ]] ; then
 	echo "today is $(date '+%A %D') !"
+	echo "and I think you're awesome"
 	echo "Thanks for talking to me!"
 	echo " "
-	return
     else echo "Well, that went well."
 	 echo " "
-	 return
     fi
 }
 
@@ -166,49 +165,20 @@ function leave () {
     echo "It will be lonely without you here."
     echo "but if you must..."
     yes_no "Must you?"
-    if [[ $? = 1 ]] ; then
-	echo "Goodbye then. Thank you for stopping by."
+    if [[ $? == 1 ]] ; then
+	echo "Goodbye then. I'm glad you stopped by."
 	exit
     else echo "I'm glad you can stay with me for a little longer."
 	 echo "what would you like to do now?"
 	 echo " "
-	 return
     fi
 }
 
 
-
-#thing3="See you soon!"
 
 echo "Hello"
 echo "My name is Yuki. I'm here to help"
 read -p "what's your name?" varname
 echo "it's nice to meet you $varname"
 main_menu
-#The code will never reach this point (or anything below it).
 
-#what's below should be esntally the yes_or_no function (with some changes)
-read -p "Are you leaving me? [y/n]" answer
-
-case $answer in
-    y | Y | yes | Yes | Yea | yea | Yeah | yeah | yep | Yep | yup | Yup)
-	echo "Goodbye"
-	exit ;;
-    n)
-	echo "So you're not leaving?"
-	;;
-    *)
-	echo "Only 'y' or 'n' please."
-esac
-
-
-#    else 
-#	echo "I'm glad you stayed."
-#	read -p "you should really go though. [y/n]" answer2
-#	if [ $answer2 = y ] ; then
-#	    echo "$thing3"
-#	else
-#	    echo "I promise I'll see you again, bye!"
-#	    exit
-#	fi
-#   fi
