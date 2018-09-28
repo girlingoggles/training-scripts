@@ -9,13 +9,14 @@
 function yes_no () {
     all_done=0
     while (( !all_done)); do
+	echo -n $@
 	read yn
     case $yn in
     	 y | Y | yes | Yes | Yea | yea | Yeah | yeah | yep | Yep | yup | Yup | ya | Ya) return 1 ;; 
     	n | N | no | No | nah | Nah | nope | Nope | Na | na) return 0 ;;
      esac
      
-     echo "not a valid response"
+     echo "yes or no only, please"
     done
 }
 
@@ -74,8 +75,7 @@ function number_loop () {
 }
 
 function have_chat () {
-    echo "do you want to know something?"
-    yes_no
+    yes_no "Do you want to know something?"
     if [[ $? = 1 ]] ; then
 	echo "today is $(date '+%A %D') !"
 	echo "Thanks for talking to me!"
@@ -109,8 +109,7 @@ be"
     }
 
 function cake () {
-    echo "Do you like cake?"
-    yes_no
+    yes_no "Do you like cake?"
     if [[ $? == 1 ]] ; then
 	echo "The cake is a lie"
 	echo "But you already knew that"
@@ -129,10 +128,11 @@ function cake () {
 	    Candy | candy)
 		echo "Too many varieties of sweets to list, too many to try!" ;;
 	    *)
+		answer=False
 		echo "Is that a dessert?"  ;;
 	esac
 	# it says this even if it triggers "Is that a dessert?" Also, should be quoted.
-	if [[ $answer == * ]] ; then
+	if [[ $answer == False ]] ; then
 	    echo "I'll have to look into this"
 	    echo " "
 	else
@@ -166,8 +166,7 @@ function music () {
 function leave () {
     echo "It will be lonely without you here."
     echo "but if you must..."
-    echo "Must you?"
-    yes_no
+    yes_no "Must you?"
     if [[ $? = 1 ]] ; then
 	echo "Goodbye then. Thank you for stopping by."
 	exit
