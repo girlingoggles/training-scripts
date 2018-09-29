@@ -2,6 +2,7 @@
 #Lucy S
 #Version 1: Takes a one-digit number and echoes the word
 #Version 2: Takes a one or two digit number and passes it to a function (speak_number_tens) which says the tens place (special for 10-19) and then sends the digit in the ones place through speak_number_ones.
+#Version 2: Check for $1 in global, if exists, use it, else prompt for user input. Each function should use $1 as their input and pass other input to next function. new function speak_number_hundreds that (if number has a hundred) uses the speak_number_ones function on the hundreds place, echos "hundred" and then passes remaining 2 digits to speak_number_tens
 
 
 
