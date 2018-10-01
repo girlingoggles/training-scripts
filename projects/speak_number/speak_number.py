@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-#Lucy S
+#girlingoggles made this
+
+import sys
 
 def speak_number_ones():
-nb = raw_input('Choose a number')
-print('nb')
+    nb = raw_input('Choose a number')
+    print('nb')
 
 
 def speak_number_teens():
@@ -12,6 +14,7 @@ def speak_number_teens():
 def speak_number_tens():
 
 
-def main ()
-
-main() 
+def main(number):
+    if
+    
+main (argv[1])
