@@ -20,28 +20,27 @@ function yes_no () {
     done
 }
 
-
 function main_menu () {
     all_done=0
     while (( !all_done )); do
-	echo "Would you like to:"
-	echo "chat"
-	echo "affirmation"
-	echo "math"
-	echo "cake"
-	echo "music"
-	echo "leave"
-	read -p "Please choose one:" answer
-	
-	case $answer in
-	    Chat | chat) have_chat ;;		
-	    Math | math) number_loop ;;
-	    Affirmation | affirmation) affirmation ;;
-	    Cake | cake) cake ;;
-	    Music | music) music ;;
-	    Leave | leave) leave ;;
-	    *) echo "try again" ;;
-	esac
+    echo "Would you like to:"
+    echo "chat"
+    echo "affirmation"
+    echo "math"
+    echo "cake"
+    echo "music"
+    echo "leave"
+    read -p "Please choose one:" answer
+    
+    case $answer in
+        Chat | chat) have_chat ;;        
+        Math | math) number_loop ;;
+        Affirmation | affirmation) affirmation ;;
+        Cake | cake) cake ;;
+        Music | music) music ;;
+        Leave | leave) leave ;;
+        *) echo "try again" ;;
+    esac
     done
     
 }
@@ -51,38 +50,38 @@ function number_loop () {
     error_answer="Please return to your class. I hear you're learning how to count today!"
     while [ 1 ]
     do
-	read -p "What is your favourite number between 0 and 10?" answer
-	case $answer in
-	    1) echo "Because you're the best!" ; return 0 ;;
-	    2|4|6|8) echo "Even Steven?" ; return 0 ;;
-	    3|9) echo "You're an odd one, aren't you?" ; return 0 ;;
-	    5) echo "Right in the middle, best of both!" ; return 0 ;;
-	    0|10) echo "Of course YOU would choose such a fancy number" ; return 0 ;;
-	    7) echo "Feeling lucky, huh?" ; return 0 ;;
+    read -p "What is your favourite number between 0 and 10?" answer
+    case $answer in
+        1) echo "Because you're the best!" ; return 0 ;;
+        2|4|6|8) echo "Even Steven?" ; return 0 ;;
+        3|9) echo "You're an odd one, aren't you?" ; return 0 ;;
+        5) echo "Right in the middle, best of both!" ; return 0 ;;
+        0|10) echo "Of course YOU would choose such a fancy number" ; return 0 ;;
+        7) echo "Feeling lucky, huh?" ; return 0 ;;
             *) echo $error_answer ; ((errors++)) ;;
-	esac
-	if [ $errors -eq 3 ]
-	then error_answer="Are you even trying?" ;
-	fi
-   	if [ $errors -eq 4 ]
-	then error_answer="For the love of... Stop fucking with me, yea?" ;
-	fi
-	if [ $errors -eq 6 ]
-	then error_answer="This is annoying now. Stop it." ;
-	fi
-	echo " "
+    esac
+    if [ $errors -eq 3 ]
+    then error_answer="Are you even trying?" ;
+    fi
+       if [ $errors -eq 4 ]
+    then error_answer="For the love of... Stop fucking with me, yea?" ;
+    fi
+    if [ $errors -eq 6 ]
+    then error_answer="This is annoying now. Stop it." ;
+    fi
+    echo " "
     done
 }
 
 function have_chat () {
     yes_no "Do you want to know something?"
     if [[ $? == 1 ]] ; then
-	echo "today is $(date '+%A %D') !"
-	echo "and I think you're awesome"
-	echo "Thanks for talking to me!"
-	echo " "
+    echo "today is $(date '+%A %D') !"
+    echo "and I think you're awesome"
+    echo "Thanks for talking to me!"
+    echo " "
     else echo "Well, that went well."
-	 echo " "
+     echo " "
     fi
 }
 
@@ -110,34 +109,34 @@ be"
 function cake () {
     yes_no "Do you like cake?"
     if [[ $? == 1 ]] ; then
-	echo "The cake is a lie"
-	echo "But you already knew that"
-	echo " "
+    echo "The cake is a lie"
+    echo "But you already knew that"
+    echo " "
     else
-	echo "The cake is a lie anyway"
-	echo "Which do you like?"
-	read -p "Pie IceCream Cookies Candy" answer
-	case $answer in
-	    Pie | pie)
-		echo "Pie  is a fantastic choice!" ;;
-	    Ice | Cream | ice | cream | IceCream | icecream)
-		echo "IceCream is so cold!" ;;
-	    Cookies | cookies)
-		echo "Anzac, chocolate chip, coconut... There are so many!" ;;
-	    Candy | candy)
-		echo "Too many varieties of sweets to list, too many to try!" ;;
-	    *)
-		answer=False
-		echo "Is that a dessert?"  ;;
-	esac
-	# it says this even if it triggers "Is that a dessert?" Also, should be quoted.
-	if [[ $answer == False ]] ; then
-	    echo "I'll have to look into this"
-	    echo " "
-	else
-	    echo "I like $answer too!"
-	    echo " "
-	fi
+    echo "The cake is a lie anyway"
+    echo "Which do you like?"
+    read -p "Pie IceCream Cookies Candy" answer
+    case $answer in
+        Pie | pie)
+        echo "Pie  is a fantastic choice!" ;;
+        Ice | Cream | ice | cream | IceCream | icecream)
+        echo "IceCream is so cold!" ;;
+        Cookies | cookies)
+        echo "Anzac, chocolate chip, coconut... There are so many!" ;;
+        Candy | candy)
+        echo "Too many varieties of sweets to list, too many to try!" ;;
+        *)
+        answer=False
+        echo "Is that a dessert?"  ;;
+    esac
+    # it says this even if it triggers "Is that a dessert?" Also, should be quoted.
+    if [[ $answer == False ]] ; then
+        echo "I'll have to look into this"
+        echo " "
+    else
+        echo "I like $answer too!"
+        echo " "
+    fi
     fi
 }
 
@@ -150,12 +149,12 @@ function music () {
     echo "violin"
     read -p "I want:" answer
     case $answer in
-	lofi) xdg-open https://www.youtube.com/watch?v=dJhW1J6gIWA&t=766s ;;
-	trance) xdg-open https://www.youtube.com/watch?v=buqNTkjTY20 ;;
-	dubstep) xdg-open https://www.youtube.com/watch?v=a41icW_FtsI ;;
+    lofi) xdg-open https://www.youtube.com/watch?v=dJhW1J6gIWA&t=766s ;;
+    trance) xdg-open https://www.youtube.com/watch?v=buqNTkjTY20 ;;
+    dubstep) xdg-open https://www.youtube.com/watch?v=a41icW_FtsI ;;
         ghibli) xdg-open https://www.youtube.com/watch?v=YjohMzHkBqI ;;
-	samurai) xdg-open https://www.youtube.com/watch?v=jrTMMG0zJyI ;;
-	violin) xdg-open https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RDEMzT1XwmFnIup_KYXuc2rUZA
+    samurai) xdg-open https://www.youtube.com/watch?v=jrTMMG0zJyI ;;
+    violin) xdg-open https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RDEMzT1XwmFnIup_KYXuc2rUZA
     esac
     echo "Enjoy!"
     echo " "
@@ -166,11 +165,11 @@ function leave () {
     echo "but if you must..."
     yes_no "Must you?"
     if [[ $? == 1 ]] ; then
-	echo "Goodbye then. I'm glad you stopped by."
-	exit
+    echo "Goodbye then. I'm glad you stopped by."
+    exit
     else echo "I'm glad you can stay with me for a little longer."
-	 echo "what would you like to do now?"
-	 echo " "
+     echo "what would you like to do now?"
+     echo " "
     fi
 }
 
