@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 #girlingoggles made this
 
+#phase 3: add speak_number_hundreds that takes a 3 digit number and if it's more that 99, calls speak_number_ones on the hundreds place then prints hundred, then passes the last two digits to speak_number_tens
+
 import sys
 
 
-#All of these funtions should have a parameter in their () it can be called number or anything you want.
-
 def speak_number_ones(one):
+
     if one == 1:
         print("one", end = ' ')
     elif one == 2:
@@ -25,32 +26,67 @@ def speak_number_ones(one):
         print("eight", end = ' ')
     elif one == 9:
         print("nine", end = ' ')
-    else:
-        print("Try again")
-        #use ifs, elif, and else for the number and print the human readable name for the number (one through nine)
-    #use print("Hello World!", end = '') to print without newlines.
-    print("Testing", end = '') #remove this when function is no longer blank
-    
+
+
 def speak_number_teens(teen):
-    #use ifs, elif, and else for the number and print the human readable name for the number (ten through nineteen)
-    #use print("Hello World!", end = '') to print without newlines.
-    print("Testing", end = '') #remove this when function is no longer blank
+    if teen == 10:
+        print("ten", end = ' ')
+    elif teen == 11:
+        print("eleven", end = ' ')
+    elif teen == 12:
+        print("twelve", end = ' ')
+    elif teen == 13:
+        print("thirteen", end = ' ')
+    elif teen == 14:
+        print("fourteen", end = ' ')
+    elif teen == 15:
+        print("fifteen", end = ' ')
+    elif teen == 16:
+        print("sixteen", end = ' ')
+    elif teen == 17:
+        print("seventeen", end = ' ')
+    elif teen == 18:
+        print("eighteen", end = ' ')
+    elif teen == 19:
+        print("nineteen", end = ' ')
 
-def speak_number_tens(ten):
-    # use ifs, elif, and else for the number and print the human readable name for the tens digit in number ( twenty, thirty, forty, ect)
-    # print nothing if less than 10, and send to speak_number_teens if between 10 and 19 and return
-    # send ones digit (number % 10) to speak_number_ones
-    #use print("Hello World!", end = '') to print without newlines.
-    print("Testing", end = '') #remove this when function is no longer blank
+        
+def speak_number_tens(number):
 
-def main(number):
-    #call speak_number_tens passing it the number parameter
-    print("Testing", end = '') #remove this when function is no longer blank
+    ten = int(number / 10)
 
-try:
-    sys.argv[1]
-except IndexError:
-    number = int(input('Enter your number: '))
-else:
-    number = int(sys.argv[1])
-main(number)
+    if ten == 1:
+        speak_number_teens(number)
+        return 
+    elif ten == 2:
+        print("twenty", end = ' ')
+    elif ten == 3:
+        print("thirty", end = ' ')
+    elif ten == 4:
+        print("fourty", end = ' ')
+    elif ten == 5:
+        print("fifty", end = ' ')
+    elif ten == 6:
+        print("sixty", end = ' ')
+    elif ten == 7:
+        prinmt("seventy", end = ' ')
+    elif ten == 8:
+        print("eighty", end = ' ')
+    elif ten == 9:
+        print("ninety", end = ' ')
+    speak_number_ones(int(number % 10))
+
+    
+def main():
+
+    try:
+        sys.argv[1]
+    except IndexError:
+        number = int(input('Enter your number: '))
+    else:
+        number = int(sys.argv[1])
+    speak_number_tens(number)
+    print("")
+    
+
+main()
