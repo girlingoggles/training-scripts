@@ -7,7 +7,6 @@ import sys
 
 
 def speak_number_ones(one):
-
     if one == 1:
         print("one", end = ' ')
     elif one == 2:
@@ -56,7 +55,7 @@ def speak_number_tens(number):
     ten = int(number / 10)
 
     if ten == 1:
-        speak_number_teens(number)
+        speak_number_teens(ten)
         return 
     elif ten == 2:
         print("twenty", end = ' ')
@@ -76,8 +75,15 @@ def speak_number_tens(number):
         print("ninety", end = ' ')
     speak_number_ones(int(number % 10))
 
-    
-def main():
+def speak_number_hundreds(number):
+
+    hundred=(number / 100)
+    if number > 99:
+        speak_number_ones(hundred)
+        print("hundred", end= ' ')
+    speak_number_tens(number % 100)
+        
+def main(input):
 
     try:
         sys.argv[1]
@@ -85,8 +91,8 @@ def main():
         number = int(input('Enter your number: '))
     else:
         number = int(sys.argv[1])
-    speak_number_tens(number)
+    speak_number_hundreds(number)
     print("")
     
 
-main()
+main(input)
