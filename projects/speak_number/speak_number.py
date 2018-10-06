@@ -55,6 +55,7 @@ def speak_number_tens(number):
     ten = int(number / 10)
 
     if ten == 1:
+        #wrong imput to pass to speak_number_teens
         speak_number_teens(ten)
         return 
     elif ten == 2:
@@ -77,6 +78,7 @@ def speak_number_tens(number):
 
 def speak_number_hundreds(number):
 
+    #need to cast value of hundred as an int
     hundred=(number / 100)
     if number > 99:
         speak_number_ones(hundred)
