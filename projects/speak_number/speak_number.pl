@@ -3,127 +3,108 @@
 use strict;
 use warnings;
 
-# "varriable" "input" doesn't exist (if it did it would be $input)
-# command line args is in @ARGV (caps needed) so you can do either
-# my $input = @ARGV[0];
-#or pass it directly with:
-#x main(@ARGV[0]); # passes one first comand line argument to main
-# or
-# main(@ARGV); # passes every comand line argument to main   
-main($input);
+main($ARGV[0]);
 
 
-# main should call something
-# also should grab input via:
-# my $input = @_;
-# that will grab the first scalar passed to main (should be the string that holds the number)
-    # then you should do a
-    # if (not defined $input) {
-    # print "enter number";
-    # $input = <>;
-    # }
-        # and then call your function passing it $input            
 sub main {
-    my $input = @ARGV[0];
+    my ($input) = @_;
+    
     if (not defined $input) {
-	print "enter number";
+	print "Please enter a number: \n";
 	$input = <>;
     }
-    speak_number_hundreds($input)
+    speak_number_hundreds($input);
+    print "\n";
 }
 
 sub speak_number_ones {
-    #variable "one doesn't exist yet, you have to declare it
-    #all varriables are prefixed. they need either $, @, or %
+    my ($one) = @_;
 
-    #(one = 1) assigned one the value of 1. use eq or ==
-        # you can do this with one-liner ifs or a switch   
-    my $one = $input
-
-    if (one == 1) {
-	    print "one ";
-    }
-    elsif (one == 2) {
+    if ($one == 1) {
+	print "one ";
+    } elsif ($one == 2) {
 	print "two ";
-    }
-    elsif (one == 3) {
+    } elsif ($one == 3) {
 	print "three ";
-    }
-    elsif (one == 4) {
+    } elsif ($one == 4) {
 	print "four ";
-    }
-    elsif (one == 5) {
+    } elsif ($one == 5) {
 	print "five ";
-    }
-    elsif (one == 6) {
+    } elsif ($one == 6) {
 	print "six ";
-    }
-    elsif (one == 7) {
+    } elsif ($one == 7) {
 	print "seven ";
-    }
-    elsif (one == 8) {
+    } elsif ($one == 8) {
 	print "eight ";
-    }
-    elsif (one == 9) {
+    } elsif ($one == 9) {
 	print "nine ";
     }
 }
 
 sub speak_number_tens {
-    my $ten == int($input / 10)
+    my ($input) = @_;
 
-    if (ten == 1) {
+    my $ten = int($input / 10);
+
+    if ($ten == 1) {
 	speak_number_teens($input);
-    }    elsif (ten == 2) {
+	return;
+    } elsif ($ten == 2) {
 	print "twenty ";
-    }    elsif (ten == 3) {
+    } elsif ($ten == 3) {
 	print "thirty ";
-    }    elsif (ten == 4) {
+    } elsif ($ten == 4) {
 	print "fourty ";
-    }    elsif (ten == 5) {
+    } elsif ($ten == 5) {
 	print "fifty ";
-    }    elsif (ten == 6) {
+    } elsif ($ten == 6) {
 	print "sixty ";
-    }    elsif (ten == 7) {
+    } elsif ($ten == 7) {
 	print "seventy ";
-    }    elsif (ten == 8) {
+    } elsif ($ten == 8) {
 	print "eighty ";
-    }    elsif (ten == 9) {
+    } elsif ($ten == 9) {
 	print "ninety ";
     }
+
+    speak_number_ones($input % 10);
 }
 
 sub speak_number_teens {
-    if (teen == 10) {
+    my ($teen) = @_;
+
+    if ($teen == 10) {
 	print "ten ";
-	elsif (teen == 11) {
-	    print "eleven ";
-    }    elsif (teen == 12) {
+    } elsif ($teen == 11) {
+	print "eleven ";
+    } elsif ($teen == 12) {
 	print "twelve ";
-    }    elsif (teen == 13) {
+    } elsif ($teen == 13) {
 	print "thirteen ";
-    }    elsif (teen == 14) {
+    } elsif ($teen == 14) {
 	print "fourteen ";
-    }    elsif (teen == 15) {
+    } elsif ($teen == 15) {
 	print "fifteen ";
-    }    elsif (teen == 16) {
+    } elsif ($teen == 16) {
 	print "sixteen ";
-    }    elsif (teen == 17) {
+    } elsif ($teen == 17) {
 	print "seventeen ";
-    }    elsif (teen == 18) {
+    } elsif ($teen == 18) {
 	print "eighteen ";
-    }    elsif (teen == 9) {
+    } elsif ($teen == 19) {
 	print "nineteen ";
     }
 }
 
 
 sub speak_number_hundreds {
-    my $hundred = ($input / 100)
-	if ($input > 99) {
-	    speak_number_ones($input)
-		print "hundred "
+    my ($input) = @_;
+
+    my $hundred = int($input / 100);
+    if ($input > 99) {
+	speak_number_ones($hundred);
+	print "hundred ";
     }
-    speak_number_tens($input % 100)
+    speak_number_tens($input % 100);
 }
 
