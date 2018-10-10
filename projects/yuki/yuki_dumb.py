@@ -4,4 +4,4 @@
 
 import subprocess
 
-subprocess.call("yuki")
+subprocess.call("./yuki.sh")
