@@ -68,7 +68,7 @@ def affirmation():
     nice = [ "All things are for the eventual best", "You're got this\!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata\: \nIt means No Worries\!", "Being afraid of things going wrong isn\'t the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest \'til your good is better and your better is best.", "I love you", "It always seems impossible until it\'s done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated." ]
     while yn == 1:
         print("\n", choice(nice), "\n")
-        yes_no("more?"
+        yes_no("more?")
     
 #def cake():
 
