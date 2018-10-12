@@ -72,7 +72,7 @@ function main () {
     then
 	speak_number_hundreds $1
     else
-	read -p "Please type a number between 0 and 100" answer
+	read -p "Please type a number between 0 and 100: " answer
 	speak_number_hundreds $answer
     fi
 }
