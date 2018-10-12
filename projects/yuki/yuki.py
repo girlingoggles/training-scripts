@@ -65,6 +65,7 @@ def have_chat(yn):
     else:
         print("Well, that went well.")
         print(" ")
+        
     
 def affirmation():
     yn = 1
