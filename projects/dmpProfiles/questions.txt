@@ -1,0 +1,77 @@
+what's your name?	
+       my_name		
+       
+what's	your favourite number?
+       fav_num
+       
+what's	your favourite color?
+       fav_colour
+
+what's your favourite food?
+       fav_food
+
+what's your favourite drink?
+       fav_drink
+
+what do you like to do for fun?
+       hobbies
+
+what's your favourite book?
+       fav_book
+
+what's your favourite movie?
+       fav_movie
+
+what's your favourite season?
+       fav_season
+
+what's your favourite weather?
+       fav_weather
+
+who is your best friend?
+       best_friend
+
+what's your favourite place in the world?
+       fav_place
+
+if you could go anywhere, where would you go?
+       would_go
+
+What's your favourite band/musician?
+       fav_music
+
+if you could, where would you work?
+       where_work
+
+what's your favourite sport?
+       fav_sport
+
+who do you look up to?
+       role_model
+
+^ why?
+       role_model_why
+
+what's your best piece of advice/that you've been given?
+       best_advice
+
+what's your favourite feel-good quote?
+       feel_good (can be added to affirmation randomization maybe?)
+
+what makes you happy?
+       what_happy
+
+what's your favourite flower?
+       fav_flower
+
+what's your favourite memory?
+       fav_memory
+
+what's your favourite animal?
+       fav_animal
+
+what's your biggest fear?
+       big_fear
+
+if you have pets, what are their names?
+       pet_list
