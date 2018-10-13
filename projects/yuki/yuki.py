@@ -76,7 +76,6 @@ def do_math():
             repeat = False
 
 def basic_math():
-
     calc = True
     while calc:
         def add(x,y):
@@ -87,7 +86,6 @@ def basic_math():
             return x * y
         def divide(x, y):
             return x / y
-        
         print("Would you like to: ")
         print("1. add")
         print("2. subtract")
@@ -100,33 +98,18 @@ def basic_math():
         num2 = int(input("Second number please: "))
         if act == '1' or act == '1.' or act == '1. ' or act == 'add':
             print(num1, "+", num2, "=", add(num1, num2))
-            if  yes_no("more?"):
-                calc = True
-            else:
-                calc = False
         elif act == '2' or act == '2.' or act == '2. ' or act == 'subtract':
             print(num1, "-", num2, "=", subtract(num1, num2))
-            if  yes_no("more?"):
-                calc = True
-            else:
-                calc = False
         elif act == '3' or act == '3.' or act == '3. ' or act == 'multiply':
             print(num1, "*", num2, "=", multiply(num1, num2))
-            if  yes_no("more?"):
-                calc = True
-            else:
-                calc = False
         elif act == '4' or act == '4.' or act == '4. ' or act == 'divide':
             print(num1, "/", num2, "=", divide(num1, num2))
-            if  yes_no("more?"):
-                calc = True
-            else:
-                calc = False
         elif act == '5' or act == '5.' or act == '5. ' or act == 'go back' or act == 'back':
-            calc = False
+            calc = yes_no("go back?")
         else:
             print("Please choose a number")
 
+        calc = yes_no("more?")
         #you could deal with calc here (inside the while loop but outside the ifs
         #can also be done easier by using the boolean return from yes_no directly
         #ie: calc = yes_no("more?")
@@ -156,9 +139,8 @@ def have_chat():
 def affirmation():
     yn = 1
     nice = [ "All things are for the eventual best", "You've got this!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata: \nIt means No Worries!", "Being afraid of things going wrong isn't the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest 'til your good is better and your better is best.", "I love you", "It always seems impossible until it's done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated." ]
-    #print before while and then use yes_no in while loop conditional
+    print(random.choice(nice))
     while yn == 1:
-        print(random.choice(nice))
         yes_no(input("more?"))
     else:
         return 0
