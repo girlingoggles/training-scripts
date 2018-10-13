@@ -105,7 +105,7 @@ def basic_math():
         elif act == '4' or act == '4.' or act == '4. ' or act == 'divide':
             print(num1, "/", num2, "=", divide(num1, num2))
         elif act == '5' or act == '5.' or act == '5. ' or act == 'go back' or act == 'back':
-            calc = yes_no("go back?")
+            print("error")
         else:
             print("Please choose a number")
 
