@@ -66,6 +66,7 @@ def do_math():
         answer = input("Please choose 1-4: ")
 
         if answer == "1" or answer == "1.":
+            #you are returning booleans in basic_math but not catching them
             basic_math()
         elif answer == "2" or answer == "2.":
             favourite_num()
@@ -75,6 +76,7 @@ def do_math():
             repeat = False
 
 def basic_math():
+<<<<<<< HEAD
     calc = True
     while calc:
         def add(x,y):
@@ -126,6 +128,49 @@ def basic_math():
             print("Please choose a number")
 
         
+=======
+    def add(x,y):
+        return x + y
+    def subtract(x, y):
+        return x - y
+    def multiply(x, y):
+        return x * y
+    def divide(x, y):
+        return x / y
+
+    print("Would you like to: ")
+    print("1. add")
+    print("2. subtract")
+    print("3. multiply")
+    print("4. divide")
+    # 0 should be the return option
+    print("5. go back")
+    act = input("I would like to: ")
+    print(act)
+    #probebly want to act.lower before comparisions
+
+    #gonna want to wrap these in a try or someone can crash your program by giving non ints
+    num1 = int(input("First number please: "))
+    num2 = int(input("Second number please: "))
+    if act == '1' or act == '1.' or act == '1. ' or act == 'add':
+        print(num1, "+", num2, "=", add(num1, num2))
+    elif act == '2' or act == '2.' or act == '2. ' or act == 'subtract':
+        print(num1, "-", num2, "=", subtract(num1, num2))
+    elif act == '3' or act == '3.' or act == '3. ' or act == 'multiply':
+        print(num1, "*", num2, "=", multiply(num1, num2))
+    elif act == '4' or act == '4.' or act == '4. ' or act == 'divide':
+        print(num1, "/", num2, "=", divide(num1, num2))
+    elif act == '5' or act == '5.' or act == '5. ' or act == 'go back' or act == 'back':
+        return False
+    else:
+        # you say try again, but this is not in a loop
+        print("Please try again")
+    # this can be done more consisly as return yes_no("more?") though I'm not sure this works either way. (youre not in a loop)
+    if  yes_no("more?"):
+        return True
+    else:
+        return False
+>>>>>>> 60514ea158e6cebd01efc38ef4ae5cb3adf48f5d
         
 
 #    favourite_num()

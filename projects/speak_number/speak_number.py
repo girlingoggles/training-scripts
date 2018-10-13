@@ -56,7 +56,7 @@ def speak_number_tens(number):
 
     if ten == 1:
         #wrong imput to pass to speak_number_teens
-        speak_number_teens(ten)
+        speak_number_teens(number)
         return 
     elif ten == 2:
         print("twenty", end = ' ')
@@ -79,13 +79,13 @@ def speak_number_tens(number):
 def speak_number_hundreds(number):
 
     #need to cast value of hundred as an int
-    hundred=(number / 100)
+    hundred=int(number / 100)
     if number > 99:
         speak_number_ones(hundred)
         print("hundred", end= ' ')
     speak_number_tens(number % 100)
         
-def main(input):
+def main_menu():
 
     try:
         sys.argv[1]
@@ -96,5 +96,7 @@ def main(input):
     speak_number_hundreds(number)
     print("")
     
+if (__name__ == "__main__"):
+    main_menu()
 
-main(input)
+
