@@ -66,6 +66,7 @@ def do_math():
         answer = input("Please type 2-4: ")
 
         if answer == "1" or answer == "1.":
+            #you are returning booleans in basic_math but not catching them
             basic_math()
         elif answer == "2" or answer == "2.":
             favourite_num()
@@ -89,9 +90,13 @@ def basic_math():
     print("2. subtract")
     print("3. multiply")
     print("4. divide")
+    # 0 should be the return option
     print("5. go back")
     act = input("I would like to: ")
     print(act)
+    #probebly want to act.lower before comparisions
+
+    #gonna want to wrap these in a try or someone can crash your program by giving non ints
     num1 = int(input("First number please: "))
     num2 = int(input("Second number please: "))
     if act == '1' or act == '1.' or act == '1. ' or act == 'add':
@@ -105,7 +110,9 @@ def basic_math():
     elif act == '5' or act == '5.' or act == '5. ' or act == 'go back' or act == 'back':
         return False
     else:
+        # you say try again, but this is not in a loop
         print("Please try again")
+    # this can be done more consisly as return yes_no("more?") though I'm not sure this works either way. (youre not in a loop)
     if  yes_no("more?"):
         return True
     else:
