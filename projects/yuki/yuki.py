@@ -6,10 +6,13 @@
 import datetime
 import random
 import speak_number
+from pprint import pprint
+import requests
+
 
 def yes_no(question):
-    yes = set(['yes', 'y', 'ye', 'yea', 'yeah', 'yep', 'yup'])
-    no = set(['no', 'nope', 'n', 'nah', 'na'])
+    yes = set(['yes', 'y', 'ye', 'yea', 'yeah', 'yep', 'yup', 'ya'])
+    no = set(['no', 'nope', 'n', 'nah', 'na', 'neh'])
     
     while True:
         yn = input(question)
@@ -59,11 +62,11 @@ def do_math():
     repeat = True
     while repeat:
         print("You can: ")
+        print("0. go back")
         print("1. do basic math")
         print("2. tell me your favourite number")
         print("3. say a number")
-        print("4. go back")
-        answer = input("Please choose 1-4: ")
+        answer = input("Please choose 0-3: ")
 
         if answer == "1" or answer == "1.":
             #you are returning booleans in basic_math but not catching them
@@ -72,7 +75,7 @@ def do_math():
             favourite_num()
         elif answer == "3" or answer == "3.":
             speak_number.main_menu()
-        elif answer == "4" or answer == "4.":
+        elif answer == "0" or answer == "0." or answer == "back":
             repeat = False
 
 def basic_math():
@@ -87,13 +90,17 @@ def basic_math():
         def divide(x, y):
             return x / y
         print("Would you like to: ")
+        print("0. go back")
         print("1. add")
         print("2. subtract")
         print("3. multiply")
         print("4. divide")
-        print("5. go back")
+    
         act = input("I would like to: ")
         print(act)
+        if act == '0' or act == '0.' or act == '0. ' or act == 'go back' or act == 'back':
+            return False
+
         num1 = int(input("First number please: "))
         num2 = int(input("Second number please: "))
         if act == '1' or act == '1.' or act == '1. ' or act == 'add':
@@ -103,13 +110,14 @@ def basic_math():
         elif act == '3' or act == '3.' or act == '3. ' or act == 'multiply':
             print(num1, "*", num2, "=", multiply(num1, num2))
         elif act == '4' or act == '4.' or act == '4. ' or act == 'divide':
-            print(num1, "/", num2, "=", divide(num1, num2))
-        elif act == '5' or act == '5.' or act == '5. ' or act == 'go back' or act == 'back':
-            print("error")
+            if (num2 == 0):
+                print("Please don't hurt me like that")
+            else:
+                print(num1, "/", num2, "=", divide(num1, num2))
         else:
             print("Please choose a number")
-
-        calc = yes_no("more?")
+            
+        calc = yes_no("again?")
         #you could deal with calc here (inside the while loop but outside the ifs
         #can also be done easier by using the boolean return from yes_no directly
         #ie: calc = yes_no("more?")
@@ -122,7 +130,36 @@ def basic_math():
 
     
 def have_chat():
+    talk = True
+    while True:
+    print("What would you like to talk about?")
+    print("0. go back")
+    print("1. weather")
+    print("2. favourites")
+    print("3. random")
+    print("4. who am I?")
+    ch = input("I would like to: ")
+    print(ch)
+    ch = ch.lower()
+    if ch == "0" or ch == "0." or ch == "go back":
+        return False
+    elif ch == "1" or ch == "1." or ch == "weather":
+        if (not user{"location"} == None):
+            loc = True
+            loc_city = input("What city are you in?")
+            print(loc_city)
+            loc_country = input("What country are you in?")
+            print(loc_country)
 
+
+            print("Your location is ", loc_city, ", ", loc_country)
+            loc = yes_no("Is that right?")
+#           Profile.save()  ?
+        
+            
+
+
+'''
     # Maybe you should have a seperate function for Date, and lets chat could be more interactive. 
     #    yn = yes_no("Do you want to know something?\n")
     if yes_no("Do you want to know something?\n"):
@@ -134,16 +171,16 @@ def have_chat():
     else:
         print("Well, that went well.")
         print(" ")
-        
+   '''     
     
 def affirmation():
     yn = 1
     nice = [ "All things are for the eventual best", "You've got this!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata: \nIt means No Worries!", "Being afraid of things going wrong isn't the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest 'til your good is better and your better is best.", "I love you", "It always seems impossible until it's done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated." ]
     print(random.choice(nice))
-    while yn == 1:
-        yes_no(input("more?"))
-    else:
-        return 0
+    while yes_no("more?"):
+        print(random.choice(nice))
+        
+
         
 #def cake():
 
