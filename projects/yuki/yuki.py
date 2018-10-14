@@ -8,7 +8,7 @@ import random
 import speak_number
 from pprint import pprint
 import requests
-
+import Profile
 
 def yes_no(question):
     yes = set(['yes', 'y', 'ye', 'yea', 'yeah', 'yep', 'yup', 'ya'])
@@ -132,29 +132,34 @@ def basic_math():
 def have_chat():
     talk = True
     while True:
-    print("What would you like to talk about?")
-    print("0. go back")
-    print("1. weather")
-    print("2. favourites")
-    print("3. random")
-    print("4. who am I?")
-    ch = input("I would like to: ")
-    print(ch)
-    ch = ch.lower()
-    if ch == "0" or ch == "0." or ch == "go back":
-        return False
-    elif ch == "1" or ch == "1." or ch == "weather":
-        if (not user{"location"} == None):
-            loc = True
-            loc_city = input("What city are you in?")
-            print(loc_city)
-            loc_country = input("What country are you in?")
-            print(loc_country)
-
-
-            print("Your location is ", loc_city, ", ", loc_country)
-            loc = yes_no("Is that right?")
-#           Profile.save()  ?
+        print("What would you like to talk about?")
+        print("0. go back")
+        print("1. weather")
+        print("2. favourites")
+        print("3. random")
+        print("4. who am I?")
+        ch = input("I would like to: ")
+        print(ch)
+        ch = ch.lower()
+        if ch == "0" or ch == "0." or ch == "go back":
+            return False
+        elif ch == "1" or ch == "1." or ch == "weather":
+#            if (user{"location"} == None):
+            if value not in Profile.location():
+                loc = True
+                loc_city = input("What city are you in?")
+                print(loc_city)
+                loc_country = input("What country are you in? Abbreviations only please")
+                print(loc_country)
+                Profile.save()
+            else:
+                Profile.load()
+                print("Your location is ", loc_city, ", ", loc_country)
+                loc = yes_no("Is that right?")
+                r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=London&APPID={APIKEY}')
+                pprint(r.json())
+            
+        #           Profile.save()  ?
         
             
 
