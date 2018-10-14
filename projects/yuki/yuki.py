@@ -11,7 +11,7 @@ import requests
 import Profile
 
 def yes_no(question):
-    yes = set(['yes', 'y', 'ye', 'yea', 'yeah', 'yep', 'yup', 'ya'])
+    yes = set(['yes', 'y', 'ye', 'yea', 'yeah', 'yep', 'yup', 'ya', ' '])
     no = set(['no', 'nope', 'n', 'nah', 'na', 'neh'])
     
     while True:
@@ -180,15 +180,41 @@ def have_chat():
     
 def affirmation():
     yn = 1
-    nice = [ "All things are for the eventual best", "You've got this!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata: \nIt means No Worries!", "Being afraid of things going wrong isn't the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest 'til your good is better and your better is best.", "I love you", "It always seems impossible until it's done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated." ]
+    nice = [ "All things are for the eventual best", "You've got this!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata: \nIt means No Worries!", "Being afraid of things going wrong isn't the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest 'til your good is better and your better is best.", "I love you", "It always seems impossible until it's done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated.", "I believe in you.", "You have already won. \nEverything else is extra."]
     print(random.choice(nice))
     while yes_no("more?"):
         print(random.choice(nice))
         
 
         
-#def cake():
-
+def cake():
+    sweet = yes_no("Do you like cake?")
+    if sweet == True:
+        print("The cake is a lie")
+        print("But you already knew that.")
+        print(" ")
+    else:
+        print("The cake is a lie anyway")
+        print("Which do you like?")
+        sugar = input("Pie IceCream Cookies Candy\n")
+        sugar = sugar.lower()
+        if sugar == 'pie':
+            print("Pie is a fantastic choice!")
+        elif sugar == 'icecream' or sugar == 'ice cream':
+            print("IceCream is so cold!")
+        elif sugar == 'cookies':
+            print("Anzac, chocolate chip, coconut... There are so many!")
+        elif sugar == 'candy':
+            print("Too many varieties of sweets to list, too many to try!")
+        else:
+            sugar = False
+            print("Is that a dessert?")
+        if sugar == False:
+            print("I'll have to look into this")
+            print(" ")
+        else:
+            print("I like ", sugar, "too!")
+            
 #def music():
 
 def leave():
@@ -204,6 +230,10 @@ def leave():
         print(" ")
         return False
 
+
+#I have no idea what I'm doing but I'm pretty sure these are wrong?
+#user = Profile.Profile(DumpFile, False)
+#profile = profile.add_user(prof) 
     
 if ( __name__ == "__main__"):
     main_menu()
