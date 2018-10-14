@@ -11,18 +11,12 @@ class Profile:
         self.username = username
         self.profiles = {}
         try:
-            fh = open(self.DumpFile, 'r')
+            open(self.DumpFile, 'r')
             self.load()
-            self.new = False
         except FileNotFoundError:
             if self.verbose: print("Dump file (" + self.DumpFile + ") not found, creating new file.")
-            self.new = True
 
         self.save()
-        
-    def toJSON(self):
-                return json.dumps(self, default=lambda o: o.__dict__,
-                                              sort_keys=True, indent=4)
         
     def save(self):
         with open(self.DumpFile, 'w') as outfile:  
@@ -43,20 +37,31 @@ class Profile:
         
     def set_default(self, username):
 
-        self.defaultUser = self.profiles[username][self.username]
-        self.save()
+        username.lower()
+        if (self.profiles[username] != None):
+            self.defaultUser = username
+            self.save()
+        else:
+            return False
 
 
     def add_user(self, user, default = False):
 
+        username = user[self.username]
+        username = username.lower()
         if (len(self.profiles.keys()) == 0):
-            self.defauluser = user[self.username]
-        self.profiles[user[self.username].lower()] = user
-
+            self.defaultuser = username
+        self.profiles[username] = user
         self.save()
+        return self.get_user(username)
 
     def get_user(self, user):
+        user = user.lower()
         try:
-            return self.profiles[user.lower()]
+            return self.profiles[user]
         except KeyError:
             return None
+
+    def get_user_num(self):
+
+        return len(self.profiles.keys())

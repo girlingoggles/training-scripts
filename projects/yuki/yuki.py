@@ -25,10 +25,9 @@ def yes_no(question):
             print("\nyes or no only, please.\n")
 
 def main_menu():
-#    all_done = 0
-    #unless you are going to change all_done, hard-code whileloops
-    print("Hello")
     print("My name is Yuki. I'm here to help")
+    get_user()
+    print("Hello " + user["name"])
     while True:
         print("Would you like to: ")
         print("chat")
@@ -142,20 +141,27 @@ def have_chat():
         print(ch)
         ch = ch.lower()
         if ch == "0" or ch == "0." or ch == "go back":
+            #why is this returning False? it can just return. the False is not being caught
             return False
         elif ch == "1" or ch == "1." or ch == "weather":
 #            if (user{"location"} == None):
+            # there is no function called location. if there was,
+            # you need to look at user NOT profile (the variable) definitly not Profile (the module)
             if value not in Profile.location():
+                # what is this boolean for?
                 loc = True
                 loc_city = input("What city are you in?")
                 print(loc_city)
                 loc_country = input("What country are you in? Abbreviations only please")
                 print(loc_country)
+                #you are saving, but not changing anything in user or profile
                 Profile.save()
             else:
+                # you shouldn't ever have to call profile load. that was done when you made a new Profile object
                 Profile.load()
                 print("Your location is ", loc_city, ", ", loc_country)
                 loc = yes_no("Is that right?")
+                #this request should be done whether (weather pun, hehe) you had given location before or not (ie: outside of this if)
                 r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=London&APPID={APIKEY}')
                 pprint(r.json())
             
@@ -231,9 +237,29 @@ def leave():
         return False
 
 
-#I have no idea what I'm doing but I'm pretty sure these are wrong?
-#user = Profile.Profile(DumpFile, False)
-#profile = profile.add_user(prof) 
+def get_user():
+
+    global user
+    if (profile.get_user_num() == 0):
+        print("I don't know anyone, yet")
+        username = input("What's your name? ")
+        user = profile.add_user({"name" : username})
+    elif (profile.defaultuser != None and profile.defaultuser != ""):
+        user = profile.get_user(profile.defaultuser);
+    else:
+        print("users exist, but no default user set")
+        while (user == None):
+            profile.list_users()
+            username = input("please pick from the list of users")
+            user = profile.get_user(username)
+            if (user == None):
+                print("please enter one of the usernames listed")
+
+
     
+profile = Profile.Profile("yuki.dmp")
+user = None
+
 if ( __name__ == "__main__"):
     main_menu()
+
