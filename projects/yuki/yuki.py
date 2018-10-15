@@ -9,6 +9,7 @@ import speak_number
 from pprint import pprint
 import requests
 import Profile
+import webbrowser
 import sys, os
 
 
@@ -264,8 +265,30 @@ def cake():
         else:
             print("I like ", sugar, "too!")
             
-#def music():
-
+def music():
+    print("I can offer you a selection of: ")
+    print("lofi\ntrance\ndubstep\nghibli\nsamurai\nviolin\nchill\nglitch")
+    mus = input("I want to listen to: \n")
+    mus = mus.lower()
+    if mus == 'lofi':
+        webbrowser.open('https://www.youtube.com/watch?v=dJhW1J6gIWA')
+    elif mus == 'trance':
+        webbrowser.open('https://www.youtube.com/watch?v=buqNTkjTY20')
+    elif mus == 'dubstep':
+        webbrowser.open('https://www.youtube.com/watch?v=a41icW_FtsI')
+    elif mus == 'ghibli':
+        webbrowser.open('https://www.youtube.com/watch?v=YjohMzHkBqI')
+    elif mus == 'samurai':
+        webbrowser.open('https://www.youtube.com/watch?v=jrTMMG0zJyI')
+    elif mus == 'violin':
+        webbrowser.open('https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA')
+    elif mus == 'chill':
+        webbrowser.open('https://www.youtube.com/watch?v=G2WneYqu-ao')
+    elif mus == 'glitch':
+        webbrowser.open("https://www.youtube.com/watch?v=52Qug_siqKw")
+    print("I hope you like it!\n")
+        
+    
 def leave():
     print("It will be lonely without you here.")
     print("but if you must...")
