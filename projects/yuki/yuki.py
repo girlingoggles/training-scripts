@@ -9,6 +9,8 @@ import speak_number
 from pprint import pprint
 import requests
 import Profile
+import sys, os
+
 
 def yes_no(question):
     yes = set(['yes', 'y', 'ye', 'yea', 'yeah', 'yep', 'yup', 'ya', ' '])
@@ -129,6 +131,7 @@ def basic_math():
 
     
 def have_chat():
+    global user
     talk = True
     while True:
         print("What would you like to talk about?")
@@ -141,34 +144,74 @@ def have_chat():
         print(ch)
         ch = ch.lower()
         if ch == "0" or ch == "0." or ch == "go back":
-            #why is this returning False? it can just return. the False is not being caught
-            return False
+            return 
         elif ch == "1" or ch == "1." or ch == "weather":
-#            if (user{"location"} == None):
-            # there is no function called location. if there was,
-            # you need to look at user NOT profile (the variable) definitly not Profile (the module)
-            if value not in Profile.location():
-                # what is this boolean for?
-                loc = True
-                loc_city = input("What city are you in?")
-                print(loc_city)
-                loc_country = input("What country are you in? Abbreviations only please")
-                print(loc_country)
-                #you are saving, but not changing anything in user or profile
-                Profile.save()
-            else:
-                # you shouldn't ever have to call profile load. that was done when you made a new Profile object
-                Profile.load()
-                print("Your location is ", loc_city, ", ", loc_country)
-                loc = yes_no("Is that right?")
-                #this request should be done whether (weather pun, hehe) you had given location before or not (ie: outside of this if)
-                r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=London&APPID={APIKEY}')
-                pprint(r.json())
             
-        #           Profile.save()  ?
-        
+            if ("city" not in user or user["city"] == None or "country" not in user or user["country"] == None):
+                user["city"] = input("What city are you in?")
+                user["country"] = input("What country are you in? Abbreviations only please")
+                profile.save()
+
+            #should relook at this part again later
+            print("You live in ", user["city"], ", ",
+                  user["country"])
+            loc = yes_no("Did I get that right?\n")
+            r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=' + user["city"] + ',' + user["country"] + '&units=metric&APPID=99f075d4add9b18987e3c66aa77f33a3')
+            weather = r.json()
+            d = int(weather["wind"]["speed"])
+#            pprint(weather)
+            print("Looks like " +
+                  weather["weather"][0]["description"] +
+                  " outside, feels like " + str(weather["main"]["temp"]) + "C. \n" + "The wind is " + str(weather["wind"]["speed"]) + " kph" +
+                  " in a " + cardinal(d)
+                  + "-ish sort of a direction.")
+#                  " in " + user["city"])
+# + str(weather["wind"]["deg"])
+
+        elif ch == "4" or ch == "4." or ch == "who are you?":
+            print("Who am I?\nWhy, I'm Yuki, silly!")
+            wait_key()
+            print("I was created on 10/09/2018, originally a simple tutorial program named example1, but like most of Miru's projects, I got a little out of hand.")
+            wait_key()
+            print("Now I can do all sorts of things, and I'm only getting better every day!")
+            wait_key()
+            print("I can do basic math, tell you the weather, play you some of Miru's favourite music, and tell you nice things to keep you going.")
+            wait_key()
+            print("I hope you'll keep me around, and update me when you can, to see what else I learn and become!")
+            wait_key()
+            print("Thank you so much for believing in me!")
+
+            
+def cardinal(d):
+    dir = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+    met = int((d + 11.25)/22.5)
+    return dir[met % 16]
             
 
+    #copied from stackoverflow, see if it works
+def wait_key():
+    ''' Wait for a key press on the console and return it. '''
+    result = None
+    if os.name == 'nt':
+        import msvcrt
+        result = msvcrt.getch()
+    else:
+        import termios
+        fd = sys.stdin.fileno()
+
+        oldterm = termios.tcgetattr(fd)
+        newattr = termios.tcgetattr(fd)
+        newattr[3] = newattr[3] & ~termios.ICANON & ~termios.ECHO
+        termios.tcsetattr(fd, termios.TCSANOW, newattr)
+
+        try:
+            result = sys.stdin.read(1)
+        except IOError:
+            pass
+        finally:
+            termios.tcsetattr(fd, termios.TCSAFLUSH, oldterm)
+
+    return result
 
 '''
     # Maybe you should have a seperate function for Date, and lets chat could be more interactive. 
