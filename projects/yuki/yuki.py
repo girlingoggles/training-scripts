@@ -98,7 +98,7 @@ def basic_math():
         print("3. multiply")
         print("4. divide")
     
-        act = input("I would like to: ")
+        act = input("I would like to: \n")
         print(act)
         if act == '0' or act == '0.' or act == '0. ' or act == 'go back' or act == 'back':
             return False
@@ -142,33 +142,16 @@ def have_chat():
         print("3. random")
         print("4. who am I?")
         ch = input("I would like to: ")
-        print(ch)
+#        print(ch)
         ch = ch.lower()
         if ch == "0" or ch == "0." or ch == "go back":
             return 
         elif ch == "1" or ch == "1." or ch == "weather":
-            
-            if ("city" not in user or user["city"] == None or "country" not in user or user["country"] == None):
-                user["city"] = input("What city are you in?")
-                user["country"] = input("What country are you in? Abbreviations only please")
-                profile.save()
-
-            #should relook at this part again later
-            print("You live in ", user["city"], ", ",
-                  user["country"])
-            loc = yes_no("Did I get that right?\n")
-            r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=' + user["city"] + ',' + user["country"] + '&units=metric&APPID=99f075d4add9b18987e3c66aa77f33a3')
-            weather = r.json()
-            d = int(weather["wind"]["speed"])
-#            pprint(weather)
-            print("Looks like " +
-                  weather["weather"][0]["description"] +
-                  " outside, feels like " + str(weather["main"]["temp"]) + "C. \n" + "The wind is " + str(weather["wind"]["speed"]) + " kph" +
-                  " in a " + cardinal(d)
-                  + "-ish sort of a direction.")
-#                  " in " + user["city"])
-# + str(weather["wind"]["deg"])
-
+            weather()
+        elif ch == "2" or ch == "2." or ch == "favourites":
+            print("I haven't been finished yet, sorry!")
+        elif ch == "3" or ch == "3." or ch == "random":    
+            print("I haven't been finished yet, sorry!")
         elif ch == "4" or ch == "4." or ch == "who are you?":
             print("Who am I?\nWhy, I'm Yuki, silly!")
             wait_key()
@@ -182,6 +165,32 @@ def have_chat():
             wait_key()
             print("Thank you so much for believing in me!")
 
+def weather():
+    while True:
+        if ("city" not in user or user["city"] == None or "country" not in user or user["country"] == None):
+            user["city"] = input("What city are you in? \n")
+            user["country"] = input("What country are you in? Abbreviations only please \n")
+            profile.save()
+            
+            #should relook at this part again later
+        print("You live in ", user["city"], ", ",
+                  user["country"])
+        loc = yes_no("Did I get that right?\n")
+        if (loc == True):
+            r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=' + user["city"] + ',' + user["country"] + '&units=metric&APPID=99f075d4add9b18987e3c66aa77f33a3')
+            weather = r.json()
+            d = int(weather["wind"]["speed"])
+            print("Looks like " +
+                  weather["weather"][0]["description"] +
+                  " outside, feels like " + str(weather["main"]["temp"]) + "C. \n" + "The wind is " + str(weather["wind"]["speed"]) + " kph" +
+                  " in a " + cardinal(d)
+                  + "-ish sort of a direction.")
+            return False
+        else:
+            user["city"] = None
+            user["country"] = None
+            profile.save()
+
             
 def cardinal(d):
     dir = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
@@ -189,7 +198,7 @@ def cardinal(d):
     return dir[met % 16]
             
 
-    #copied from stackoverflow, see if it works
+    #copied from stackoverflow
 def wait_key():
     ''' Wait for a key press on the console and return it. '''
     result = None
