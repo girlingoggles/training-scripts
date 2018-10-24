@@ -55,7 +55,6 @@ def speak_number_tens(number):
     ten = int(number / 10)
 
     if ten == 1:
-        #wrong imput to pass to speak_number_teens
         speak_number_teens(number)
         return 
     elif ten == 2:
@@ -78,23 +77,79 @@ def speak_number_tens(number):
 
 def speak_number_hundreds(number):
 
-    #need to cast value of hundred as an int
     hundred=int(number / 100)
     if number > 99:
         speak_number_ones(hundred)
         print("hundred", end= ' ')
     speak_number_tens(number % 100)
         
+# you only need one of these functions. whichever name you chose
+def get_digit_set(digit):
+#    dig = set_place
+    if digit > 3:
+        dig = (digit // 3)
+        if dig == 1:
+            print("thousand", end=' ')
+        elif dig == 2:
+            print("million", end=' ')
+        elif dig == 3:
+            print("billion", end=' ')
+
+    
+
 def main_menu():
 
+    # I put extra hints in hints.txt
+    # 4 steps in main_menu
+    # step 1: parse input
     try:
         sys.argv[1]
     except IndexError:
         number = int(input('Enter your number: '))
     else:
         number = int(sys.argv[1])
-    speak_number_hundreds(number)
+
+
+    
+    # step 2:
+    # A: declare and init digits variable
+    digit = len(str(number))
+    digit = int(digit)
+    # B: delcare "uneven_set" variable
+    uneven_set = (digit % 3)
+    # C: if (uneven_set > 0):
+    if (uneven_set > 0):
+        speak_number_hundreds(number)
+    # deal with uneven set like you would in loop
+    
+    # step 3: for each even set
+
+    # python does for loops stupidly (they try and make it too simple) use a while loop instead
+    # A: while digits > 0:
+#    while digit > 2:
+ #       speak_number_hundreds(bit)
+    # B: declare and init set_place var
+    # C: call speak_number_hundreds
+    # D: call get_digit_set
+    # E: update number and digits 
+    while (digit > 2):
+        dig = (digit // 3)
+        bit = str(digit)[-3:]
+        bit = int(bit)
+        set_place = int(digit / 3)
+        speak_number_hundreds(bit)
+        get_digit_set(digit)
+        s_n = 0
+        s_n = int(dig) + s_n
+        digit = str(digit)
+        digit = digit[:-3]
+#        digit = int(digit)
+        
+        #    speak_number_hundreds(number)
+
+    # step 4: end: print newline and return (don't return in this version)
     print("")
+
     
 if (__name__ == "__main__"):
     main_menu()
