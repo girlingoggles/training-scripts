@@ -4,7 +4,7 @@
 #phase 3: add speak_number_hundreds that takes a 3 digit number and if it's more that 99, calls speak_number_ones on the hundreds place then prints hundred, then passes the last two digits to speak_number_tens
 
 import sys
-
+import math
 
 def speak_number_ones(one):
     if one == 1:
@@ -86,8 +86,12 @@ def speak_number_hundreds(number):
 # you only need one of these functions. whichever name you chose
 def get_digit_set(digit):
 #    dig = set_place
-    if digit > 3:
-        dig = (digit // 3)
+    digit = int(digit)
+    if (int(digit) > 3):
+        dig = (int(digit) // 3)
+        global number
+
+        speak_number_hundreds(us)
         if dig == 1:
             print("thousand", end=' ')
         elif dig == 2:
@@ -102,6 +106,7 @@ def main_menu():
     # I put extra hints in hints.txt
     # 4 steps in main_menu
     # step 1: parse input
+    global number
     try:
         sys.argv[1]
     except IndexError:
@@ -110,16 +115,17 @@ def main_menu():
         number = int(sys.argv[1])
 
 
-    
     # step 2:
     # A: declare and init digits variable
-    digit = len(str(number))
-    digit = int(digit)
+    digit = len(str(abs(number)))
+    digit = str(digit)
     # B: delcare "uneven_set" variable
-    uneven_set = (digit % 3)
     # C: if (uneven_set > 0):
-    if (uneven_set > 0):
-        speak_number_hundreds(number)
+    global us
+    us = (int(digit) % 3)
+    if (int(digit) < 3):
+        number = int(number)
+        speak_number_hundreds(us)
     # deal with uneven set like you would in loop
     
     # step 3: for each even set
@@ -132,17 +138,17 @@ def main_menu():
     # C: call speak_number_hundreds
     # D: call get_digit_set
     # E: update number and digits 
-    while (digit > 2):
-        dig = (digit // 3)
-        bit = str(digit)[-3:]
+    while (digit > "2"):
+        dig = (int(digit) // 3)
+        bit = str(number)[-3:]
         bit = int(bit)
-        set_place = int(digit / 3)
+#        set_place = int(int(digit) / 3)
+      #  speak_number_hundreds(uneven_set)
+        get_digit_set(int(digit))
         speak_number_hundreds(bit)
-        get_digit_set(digit)
         s_n = 0
-        s_n = int(dig) + s_n
         digit = str(digit)
-        digit = digit[:-3]
+        digit = str(number)[:-3]
 #        digit = int(digit)
         
         #    speak_number_hundreds(number)
