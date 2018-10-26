@@ -15,8 +15,6 @@ sub main {
 
     print "Hello\n";
     print "My name is Yuki. I'm here to help.\n";
-    # pretty sure perl boolean true is lowercase. or '1'
-    # coding convention: add space before {
     while (1) {
 	print "Would you like to: \n";
 	print "chat\n";
@@ -28,7 +26,7 @@ sub main {
 	print "Please choose one: \n";
 	my $input = <>;
 	$input = lc $input;
-    
+	chomp $input;
 	if ($input eq "chat") {
 	    have_chat();
 	} elsif ($input eq "affirmation") {
@@ -40,34 +38,39 @@ sub main {
 	} elsif ($input eq "music") {
 	    music();
 	} elsif ($input eq "leave") {
-	    leave();
+	    return 0 if (leave());
 	} else {
-	    print "\nTry again: \n"
+	    print "Test:$input:\n";
+	    print "\nTry again: \n";
 	}
     }
 }
 
 sub yes_no {
+    my $question = shift;
     while(1) {
+	print $question . "\n";
 	my $input = <>;
 	chomp $input;
 	$input = lc $input;
-```     I copied this off the internet, but I'm not sure how it works, or how to integrate it so. 
-	if (/^(y|yes|yep|ya|ye|yup|yeah)$/i) {
+#     I copied this off the internet, but I'm not sure how it works, or how to integrate it so. 
+	if ($input =~ /^(y|yes|yep|ya|ye|yup|yeah)$/i) {
 	    return 1;
-	} elsif (/^(n|no|nah|na|nope|neh)$/i) {
+	} elsif ($input =~ /^(n|no|nah|na|nope|neh)$/i) {
 	    return 0;
 	} else {
 	    print "yes/no only, please\n"
 	}
-```
-	if ($input eq "yes" || $input eq "yea" || $input eq "ye" || $inpute eq "yep" || $input eq "y" || $input eq "yeah" || $input eq "ya" || $input eq "yup") {
+=begin comment
+	if ($input eq "yes" || $input eq "yea" || $input eq "ye" || $input eq "yep" || $input eq "y" || $input eq "yeah" || $input eq "ya" || $input eq "yup") {
 	    return 1;
 	} elsif ($input eq "no" || $input eq "n" || $input eq "nope" || $input eq "nah" || $input eq "na" || $input eq "neh") {   
 	    return 0;
 	} else {
 	    print "yes/no only, please";
 	}
+=end comment
+=cut
     }
 }
 
@@ -82,8 +85,7 @@ sub do_math {
 	} elsif ($input eq "2" || $input eq "2." || $input eq "2. ") {
 	    favourite_num();
 	} elsif ($input eq "3" || $input eq "3." || $input eq "3. ") {
-	    speak_number::main();
-	    #	   import  speak_number here
+	    speak_number::speak_number();
 	} elsif ($input eq "0" || $input eq "4." || $input eq "4. "){
 	    return;
 	} else {
@@ -124,6 +126,15 @@ sub affirmation {
 }
 
 sub leave {
-
+    print "It will be lonely without you here,\nbut if you must...";
+    return yes_no("Must you?\n");
+    if (1) {
+	print "Goodbye then. I'm glad you stopped by.\nI hope I'll see you again soon.";
+	exit;
+    } else {
+	print "I'm glad you can stay with me for a little longer.\nWhat would you like to do now?\n"
+    }
+    
 }
+
 
