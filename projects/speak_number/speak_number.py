@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 #girlingoggles made this
 
-#phase 3: add speak_number_hundreds that takes a 3 digit number and if it's more that 99, calls speak_number_ones on the hundreds place then prints hundred, then passes the last two digits to speak_number_tens
+# phase 4: fix for commented inputs
+# 0
+# 20000000
+# negitives
+# decimals
+# non number input #parsing input
 
 import sys
 import math
