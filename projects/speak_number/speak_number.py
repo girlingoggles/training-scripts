@@ -83,30 +83,25 @@ def speak_number_hundreds(number):
         print("hundred", end= ' ')
     speak_number_tens(number % 100)
         
-# you only need one of these functions. whichever name you chose
 def get_digit_set(digit):
-#    dig = set_place
-    digit = int(digit)
-    if (int(digit) > 3):
-        dig = (int(digit) // 3)
-        global number
 
-        speak_number_hundreds(us)
-        if dig == 1:
-            print("thousand", end=' ')
-        elif dig == 2:
-            print("million", end=' ')
-        elif dig == 3:
-            print("billion", end=' ')
+    dig = int((digit - 1) // 3)
+    if dig == 1:
+        print("thousand", end=' ')
+    elif dig == 2:
+        print("million", end=' ')
+    elif dig == 3:
+        print("billion", end=' ')
 
     
 
 def main_menu():
 
-    # I put extra hints in hints.txt
-    # 4 steps in main_menu
-    # step 1: parse input
-    global number
+    # 0
+    # 20000000
+    # negitives
+    # decimals
+    # non number input #parsing input
     try:
         sys.argv[1]
     except IndexError:
@@ -114,46 +109,18 @@ def main_menu():
     else:
         number = int(sys.argv[1])
 
+    digit = len(str(number))
 
-    # step 2:
-    # A: declare and init digits variable
-    digit = len(str(abs(number)))
-    digit = str(digit)
-    # B: delcare "uneven_set" variable
-    # C: if (uneven_set > 0):
-    global us
-    us = (int(digit) % 3)
-    if (int(digit) < 3):
-        number = int(number)
-        speak_number_hundreds(us)
-    # deal with uneven set like you would in loop
-    
-    # step 3: for each even set
+    while (digit > 0): 
+        sl = (digit % 3)
+        if (sl == 0):
+            sl = 3
+        set_place = (10 ** (digit - sl))
+        speak_number_hundreds(number // set_place)
+        get_digit_set(digit)
+        number %= set_place
+        digit -= sl
 
-    # python does for loops stupidly (they try and make it too simple) use a while loop instead
-    # A: while digits > 0:
-#    while digit > 2:
- #       speak_number_hundreds(bit)
-    # B: declare and init set_place var
-    # C: call speak_number_hundreds
-    # D: call get_digit_set
-    # E: update number and digits 
-    while (digit > "2"):
-        dig = (int(digit) // 3)
-        bit = str(number)[-3:]
-        bit = int(bit)
-#        set_place = int(int(digit) / 3)
-      #  speak_number_hundreds(uneven_set)
-        get_digit_set(int(digit))
-        speak_number_hundreds(bit)
-        s_n = 0
-        digit = str(digit)
-        digit = str(number)[:-3]
-#        digit = int(digit)
-        
-        #    speak_number_hundreds(number)
-
-    # step 4: end: print newline and return (don't return in this version)
     print("")
 
     
