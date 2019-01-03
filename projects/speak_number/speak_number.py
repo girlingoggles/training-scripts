@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 #girlingoggles made this
 
-#phase 3: add speak_number_hundreds that takes a 3 digit number and if it's more that 99, calls speak_number_ones on the hundreds place then prints hundred, then passes the last two digits to speak_number_tens
+# phase 4: fix for commented inputs
+# 0
+# 20000000
+# negitives
+# decimals
+# non number input #parsing input
 
 import sys
-
+import math
 
 def speak_number_ones(one):
     if one == 1:
@@ -55,7 +60,6 @@ def speak_number_tens(number):
     ten = int(number / 10)
 
     if ten == 1:
-        #wrong imput to pass to speak_number_teens
         speak_number_teens(number)
         return 
     elif ten == 2:
@@ -78,23 +82,52 @@ def speak_number_tens(number):
 
 def speak_number_hundreds(number):
 
-    #need to cast value of hundred as an int
     hundred=int(number / 100)
     if number > 99:
         speak_number_ones(hundred)
         print("hundred", end= ' ')
     speak_number_tens(number % 100)
         
+def get_digit_set(digit):
+
+    dig = int((digit - 1) // 3)
+    if dig == 1:
+        print("thousand", end=' ')
+    elif dig == 2:
+        print("million", end=' ')
+    elif dig == 3:
+        print("billion", end=' ')
+
+    
+
 def main_menu():
 
+    # 0
+    # 20000000
+    # negitives
+    # decimals
+    # non number input #parsing input
     try:
         sys.argv[1]
     except IndexError:
         number = int(input('Enter your number: '))
     else:
         number = int(sys.argv[1])
-    speak_number_hundreds(number)
+
+    digit = len(str(number))
+
+    while (digit > 0): 
+        sl = (digit % 3)
+        if (sl == 0):
+            sl = 3
+        set_place = (10 ** (digit - sl))
+        speak_number_hundreds(number // set_place)
+        get_digit_set(digit)
+        number %= set_place
+        digit -= sl
+
     print("")
+
     
 if (__name__ == "__main__"):
     main_menu()
