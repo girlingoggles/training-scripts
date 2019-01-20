@@ -91,7 +91,9 @@ def commands():
         help_list()
     else:
         print("I'm sorry, I don't know how to do that yet")
-    
+        #add write to log to track common typos or possible future commands
+
+        
 def help_list():
     print("These are the things I can do for you: ")
     print("affirmation")
