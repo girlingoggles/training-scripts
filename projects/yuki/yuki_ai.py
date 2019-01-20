@@ -32,69 +32,66 @@ def main_menu():
     print("Hi! My name is Yuki. I'm here to help")
     get_user()
     print("Hello " + user["name"])
-# act should not be global
-    while True:
+    run = True
+    while run:
         act = input()
         act = act.lower()
 #should command be an array or a function call?    
 #    command = (['affirmation', 'cake', 'music', 'add', 'subtract', 'multiply', 'divide', 'favourite number', 'speak number', 'weather', 'favourites', 'random', 'dice roll', 'roll dice', 'who am i', 'time', 'date', 'new user', 'location', 'heart', 'go back', 'leave', 'help'])
-        commands(act)
+        run = commands(act)
         #chat()
-    
-def commands(act):
-    comm = True
-    while comm:
-        if "yuki" in act:
-#need to parse act
+
         
-            if " affirmation" in act:
-                affirmation()
-            elif " cake" in act: #this one looks better
-                cake()
-            elif " music" in act:
-                music()
-            elif " add" in act:
-                add()
-            elif " subtract" in act:
-                subtract()
-            elif " multiply" in act:
-                multiply()
-            elif " divide" in act:
-                divide()
-            elif " favourite number" in act:
-                favourite_num()
-            elif " speak number" in act:
-                speak_number.main_menu()
-            elif " weather" in act:
-                weather()
-            elif " favourites" in act:
-                favourites()
-            elif " random" in act:
-                random_q()
-            elif ("dice roll" or "roll dice") in act:
-                dice_roll()
-            elif "who are you" in act:
-                who_am_i()
-            elif " time" in act:
-                time()
-            elif " date" in act:
-                date()
-            elif "new user" in act:
-                new_user()
-            elif " location" in act:
-                location()
-            elif " heart" in act:
-                heart()
-            elif "go back" in act:
-                return
-            elif " leave" in act:
-                leave()
-            elif " help" in act:
-                help_list()
-            else:
-                print("I'm sorry, I don't know how to do that yet")
-        comm = False
-            #            continue
+def commands(act):
+    if "yuki" in act:
+#need to parse act
+        if " affirmation" in act:
+            affirmation()
+        elif " cake" in act: #this one looks better
+            cake()
+        elif " music" in act:
+            music(act)
+        elif " add" in act:
+            add()
+        elif " subtract" in act:
+            subtract()
+        elif " multiply" in act:
+            multiply()
+        elif " divide" in act:
+            divide()
+        elif " favourite number" in act:
+            favourite_num()
+        elif " speak number" in act:
+            speak_number.main_menu()
+        elif " weather" in act:
+            weather()
+        elif " favourites" in act:
+            favourites()
+        elif " random" in act:
+            random_q()
+        elif ("dice roll" or "roll dice") in act:
+            dice_roll()
+        elif "who are you" in act:
+            who_am_i()
+        elif " time" in act:
+            time()
+        elif " date" in act:
+            date()
+        elif "new user" in act:
+            new_user()
+        elif " location" in act:
+            location()
+        elif " heart" in act:
+            heart()
+        elif "go back" in act:
+            return
+        elif " leave" in act:
+            return leave()
+        elif " help" in act:
+            help_list()
+        else:
+            print("I'm sorry, I don't know how to do that yet")
+    return True
             
 def help_list():
     print("These are the things I can do for you: ")
@@ -120,7 +117,7 @@ def help_list():
     print("heart- I draw you a heart")
     print("go back- I go back to the previous menu")
     print("leave- You make me go back to the Void")
-    return
+
     
 #def time():
 
@@ -141,7 +138,7 @@ def weather():
             d = int(weather["wind"]["speed"])
             print("Looks like " +
                   weather["weather"][0]["description"] +
-                  " outside, feels like " + str(weather["main"]["temp"]) + "C. \n" + "The wind is" + str(weather["wind"]["speed"]) + " kph" +
+                  " outside, feels like " + str(weather["main"]["temp"]) + "C. \n" + "The wind is " + str(weather["wind"]["speed"]) + " kph" +
                   " in a " + cardinal(d)
                   + "-ish sort of a direction.")
             return False
@@ -193,42 +190,57 @@ def wait_key():
             
     return result
 
-def music():
-    print("I can offer you a selection of: ")
-    print("lofi\ntrance\ndubstep\nghibli\nsamurai\nviolin\nchill\nglitch")
-    mus = input("I want to listen to: \n")
-    mus = mus.lower()
-    if mus == 'lofi':
-        webbrowser.open('https://www.youtube.com/watch?v=dJhW1J6gIWA')
-    elif mus == 'trance':
-        webbrowser.open('https://www.youtube.com/watch?v=buqNTkjTY20')
-    elif mus == 'dubstep':
-        webbrowser.open('https://www.youtube.com/watch?v=a41icW_FtsI')
-    elif mus == 'ghibli':
-        webbrowser.open('https://www.youtube.com/watch?v=YjohMzHkBqI')
-    elif mus == 'samurai':
-        webbrowser.open('https://www.youtube.com/watch?v=jrTMMG0zJyI')
-    elif mus == 'violin':
-        webbrowser.open('https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA')
-    elif mus == 'chill':
-        webbrowser.open('https://www.youtube.com/watch?v=G2WneYqu-ao')
-    elif mus == 'glitch':
-        webbrowser.open("https://www.youtube.com/watch?v=52Qug_siqKw")
-    print("I hope you like it!\n")
 
-    
+def music(act):
+    mus = {"lofi": "https://www.youtube.com/watch?v=dJhW1J6gIWA", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
+#    print(act)
+    words = act.split()
+    title = ""
+#    print("first word is " + words[0])
+    for word in words[:]:
+#        print("testing for " + word)
+        if word in mus:
+            title = word
+            print("Found " + word + " in music")
+            webbrowser.open(mus[title])                 
+            
+    if title == "":
+        print("these are the things i can play: " + str(mus.keys()))
+        song = input("which of these would you like? \nIf none, I can add your favourite.\n")
+        song = song.lower()
+        if song in mus:
+            title = song    
+        else:
+            cont = True
+            while cont:
+                if song == "" or song == "none":
+                    song = input("What music would you like me to add?")
+                song = song.lower()
+                if yes_no("so you want to add a new song to the lable:" + song + ": right?"):
+                    new_link = input("Can you give me the link as well please?")
+                    if yes_no("so the new song :" + song + ": should open the link " + new_link + " is this correct?"):
+                        mus[song] = new_link
+                        title = song
+                        cont = False
+                    else:
+                        print("Let's try that again")
+                        song = ""
+        print(title + "'s link is " + mus[title])
+        
+    webbrowser.open(mus[title])                 
+                                            
 def leave():
     print("It will be lonely without you here.")
     print("but if you must...")
     if yes_no("Must you?\n"):
         print("Goodbye then. I'm glad you stopped by.")
         print("I hope I'll see you again soon.")
-        return True
+        return False
     else:
         print("I'm glad you can stay with me for a little longer.")
         print("What would you like to do now?")
         print(" ")
-        return False
+        return True
                                                                                         
 
 def get_user():
