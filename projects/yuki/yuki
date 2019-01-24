@@ -149,13 +149,14 @@ function music () {
     echo "violin"
     read -p "I want:" answer
     case $answer in
-    lofi) xdg-open https://www.youtube.com/watch?v=dJhW1J6gIWA&t=766s ;;
+    lofi) xdg-open https://www.youtube.com/watch?v=dJhW1J6gIWA ;;
     trance) xdg-open https://www.youtube.com/watch?v=buqNTkjTY20 ;;
     dubstep) xdg-open https://www.youtube.com/watch?v=a41icW_FtsI ;;
-        ghibli) xdg-open https://www.youtube.com/watch?v=YjohMzHkBqI ;;
+    ghibli) xdg-open https://www.youtube.com/watch?v=YjohMzHkBqI ;;
     samurai) xdg-open https://www.youtube.com/watch?v=jrTMMG0zJyI ;;
     violin) xdg-open https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RDEMzT1XwmFnIup_KYXuc2rUZA
-    esac
+
+        esac
     echo "Enjoy!"
     echo " "
 }

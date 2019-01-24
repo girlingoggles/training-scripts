@@ -101,8 +101,7 @@ function affirmation () {
     echo "Being afraid of things going wrong isn't the way to make things go right"
     echo " You know this"
     read -n 1 -srp " "
-    echo "Remember how far you've come, not just how far you have to go. \n You are not where you want to be, but neither are you where you used to \
-be"
+    echo "Remember how far you've come, not just how far you have to go. \n You are not where you want to be, but neither are you where you used to be"
     echo " "
 }
 
