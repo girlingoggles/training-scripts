@@ -192,7 +192,12 @@ def wait_key():
 
 
 def music(act):
+
+    # Step 1: see if profile["music"] is defined
+    # Step 2: if not assign it to the default (see bellow) And profile.save()
+
     mus = {"lofi": "https://www.youtube.com/watch?v=dJhW1J6gIWA", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
+    # Step 3: assign var mus to value of profile["music"] ie:( mus = profile["music"] )
 #    print(act)
     words = act.split()
     title = ""
@@ -202,7 +207,9 @@ def music(act):
         if word in mus:
             title = word
             print("Found " + word + " in music")
-            webbrowser.open(mus[title])                 
+            #we do the web browser command at the end of the function now.
+            #assigning to title should take car of that.
+#            webbrowser.open(mus[title])                 
             
     if title == "":
         print("these are the things i can play: " + str(mus.keys()))
@@ -220,6 +227,8 @@ def music(act):
                     new_link = input("Can you give me the link as well please?")
                     if yes_no("so the new song :" + song + ": should open the link " + new_link + " is this correct?"):
                         mus[song] = new_link
+                        # Step 4 profile.save() in this if.
+                        # might need to update (profile["music"] = mus) before save (not sure. should test)
                         title = song
                         cont = False
                     else:
@@ -228,7 +237,37 @@ def music(act):
         print(title + "'s link is " + mus[title])
         
     webbrowser.open(mus[title])                 
-                                            
+
+def cake():
+    sweet = yes_no("Do you like cake?")
+    if sweet == True:
+        print("The cake is a lie")
+        print("But you already knew that.")
+        print(" ")
+    else:
+        print("The cake is a lie anyway")
+        print("Which do you like?")
+        sugar = input("Pie IceCream Cookies Candy\n")
+        sugar = sugar.lower()
+        if sugar == 'pie':
+            print("Pie is a fantastic choice!")
+        elif sugar == 'icecream' or sugar == 'ice cream':
+            print("IceCream is so cold!")
+        elif sugar == 'cookies':
+            print("Anzac, chocolate chip, coconut... There are so many!")
+        elif sugar == 'candy':
+            print("Too many varieties of sweets to list, too many to try!")
+        else:
+            sugar = False
+            print("Is that a dessert?")
+        if sugar == False:
+            print("I'll have to look into this")
+            print(" ")
+        else:
+            print("I like ", sugar, "too!")
+                
+                
+    
 def leave():
     print("It will be lonely without you here.")
     print("but if you must...")
@@ -241,7 +280,13 @@ def leave():
         print("What would you like to do now?")
         print(" ")
         return True
-                                                                                        
+
+def affirmation():
+    yn = 1
+    nice = [ "All things are for the eventual best", "You've got this!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata: \nIt means No Worries!", "Being afraid of things going wrong isn't the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest 'til your good is better and your better is best.", "I love you", "It always seems impossible until it's done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated.", "I believe in you.", "You have already won. \nEverything else is extra."]
+    print(random.choice(nice))
+    while yes_no("more?"):
+        print(random.choice(nice))
 
 def get_user():
 
