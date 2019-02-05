@@ -194,10 +194,14 @@ def wait_key():
 def music(act):
 
     # Step 1: see if profile["music"] is defined
-    # Step 2: if not assign it to the default (see bellow) And profile.save()
+    if "music" not in profile.keys():
+        # Step 2: if not assign it to the default (see bellow) And profile.save()
+        profile["music"] = {"lofi": "https://www.youtube.com/watch?v=dJhW1J6gIWA", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
+        # Step 2.5 profile.save() in this if.
+        profile.save()
 
-    mus = {"lofi": "https://www.youtube.com/watch?v=dJhW1J6gIWA", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
     # Step 3: assign var mus to value of profile["music"] ie:( mus = profile["music"] )
+    mus = profile["music"]
 #    print(act)
     words = act.split()
     title = ""
@@ -228,9 +232,11 @@ def music(act):
                     if yes_no("so the new song :" + song + ": should open the link " + new_link + " is this correct?"):
                         mus[song] = new_link
                         # Step 4 profile.save() in this if.
+                        
                         # might need to update (profile["music"] = mus) before save (not sure. should test)
                         title = song
                         cont = False
+                        profile.save()
                     else:
                         print("Let's try that again")
                         song = ""
