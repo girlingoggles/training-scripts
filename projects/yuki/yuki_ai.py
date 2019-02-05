@@ -244,7 +244,7 @@ def music(act):
                         print("Let's try that again")
                         song = ""
                 else:
-                    cont = False
+                    return False
     print(title + "'s link is " + mus[title])
     webbrowser.open(mus[title])                 
 
