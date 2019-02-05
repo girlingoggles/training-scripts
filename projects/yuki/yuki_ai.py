@@ -194,14 +194,13 @@ def wait_key():
 def music(act):
 
     # Step 1: see if profile["music"] is defined
-    if "music" not in profile.keys():
+    if len(profile.music) < 1:
         # Step 2: if not assign it to the default (see bellow) And profile.save()
-        profile["music"] = {"lofi": "https://www.youtube.com/watch?v=dJhW1J6gIWA", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
+        profile.music = {"lofi": "https://www.youtube.com/watch?v=dJhW1J6gIWA", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
         # Step 2.5 profile.save() in this if.
         profile.save()
-
     # Step 3: assign var mus to value of profile["music"] ie:( mus = profile["music"] )
-    mus = profile["music"]
+    mus = profile.music
 #    print(act)
     words = act.split()
     title = ""
@@ -216,7 +215,14 @@ def music(act):
 #            webbrowser.open(mus[title])                 
             
     if title == "":
-        print("these are the things i can play: " + str(mus.keys()))
+        print("these are the things i can play: ")
+        songs = list(mus.keys())
+        for song_list in songs:
+            if song_list == songs[-1]:
+                print("or " + song_list)
+            else:
+                print(song_list, end =", ")
+            
         song = input("which of these would you like? \nIf none, I can add your favourite.\n")
         song = song.lower()
         if song in mus:
