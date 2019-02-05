@@ -10,6 +10,7 @@ class Profile:
         self.DumpFile = file_name
         self.username = username
         self.profiles = {}
+        self.music = {}
         try:
             open(self.DumpFile, 'r')
             self.load()
