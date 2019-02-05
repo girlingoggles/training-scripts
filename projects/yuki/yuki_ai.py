@@ -237,17 +237,15 @@ def music(act):
                     new_link = input("Can you give me the link as well please?")
                     if yes_no("so the new song :" + song + ": should open the link " + new_link + " is this correct?"):
                         mus[song] = new_link
-                        # Step 4 profile.save() in this if.
-                        
-                        # might need to update (profile["music"] = mus) before save (not sure. should test)
                         title = song
                         cont = False
                         profile.save()
                     else:
                         print("Let's try that again")
                         song = ""
-        print(title + "'s link is " + mus[title])
-        
+                else:
+                    cont = False
+    print(title + "'s link is " + mus[title])
     webbrowser.open(mus[title])                 
 
 def cake():
