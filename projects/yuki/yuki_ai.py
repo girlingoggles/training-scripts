@@ -39,8 +39,17 @@ def main_menu():
 #should command be an array or a function call?    
 #    command = (['affirmation', 'cake', 'music', 'add', 'subtract', 'multiply', 'divide', 'favourite number', 'speak number', 'weather', 'favourites', 'random', 'dice roll', 'roll dice', 'who am i', 'time', 'date', 'new user', 'location', 'heart', 'go back', 'leave', 'help'])
         run = commands(act)
+        if "help" in act:
+            help_list() 
         #chat()
 
+def random_q():
+    pass
+
+    #try:
+    #    asd()
+    #except NameError as e:
+    #    print(e)
         
 def commands(act):
     if "yuki" in act:
@@ -96,7 +105,7 @@ def commands(act):
     return True
             
 def help_list():
-    print("These are the things I can do for you: ")
+    print("These are the things I can do for you.\nPlease type 'yuki' followed by one of the following commands:  \n")
     print("affirmation- I tell you a nice thing")
     print("cake- I ask you about cake")
     print("music- I put on a youtube playlist")
@@ -173,8 +182,31 @@ def dice_roll(act):
             print(random.choice(dice20))
             while yes_no("roll again?"):
                 print(random.choice(dice20))
-                
-        
+
+def add():
+    num1 = int(input("First number please: "))
+    num2 = int(input("Second number please: "))
+    print(num1, "+", num2, "=", num1 + num2)
+
+    
+def subtract():
+    num1 = int(input("First number please: "))
+    num2 = int(input("Second number please: "))
+    print(num1, "-", num2, "=", num1 - num2)
+    
+def multiply():
+    num1 = int(input("First number please: "))
+    num2 = int(input("Second number please: "))
+    print(num1, "-", num2, "=", num1 * num2)
+    
+def divide():
+    num1 = int(input("First number please: "))
+    num2 = int(input("Second number please: "))
+    print(num1, "-", num2, "=", num1 / num2)
+    
+#def favourite_num():
+     
+    
 def time():
     now = datetime.datetime.now()
     print("It is currently: ")
@@ -236,7 +268,7 @@ def who_am_i():
     print("Thank you so much for believing in me!")
 
 def wait_key():
-    ''' Wait for a key press on the console and return it. '''
+    ''' Wait for a key press on the console and return it. Pulled from StackExchange'''
     result = None
     if os.name == 'nt':
         import msvcrt
@@ -262,26 +294,16 @@ def wait_key():
 
 def music(act):
 
-    # Step 1: see if profile["music"] is defined
     if len(profile.music) < 1:
-        # Step 2: if not assign it to the default (see bellow) And profile.save()
         profile.music = {"lofi": "https://www.youtube.com/watch?v=dJhW1J6gIWA", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
-        # Step 2.5 profile.save() in this if.
         profile.save()
-    # Step 3: assign var mus to value of profile["music"] ie:( mus = profile["music"] )
     mus = profile.music
-#    print(act)
     words = act.split()
     title = ""
-#    print("first word is " + words[0])
     for word in words[:]:
-#        print("testing for " + word)
         if word in mus:
             title = word
             print("Found " + word + " in music")
-            #we do the web browser command at the end of the function now.
-            #assigning to title should take car of that.
-#            webbrowser.open(mus[title])                 
             
     if title == "":
         print("these are the things i can play: ")
@@ -317,6 +339,20 @@ def music(act):
     print(title + "'s link is " + mus[title])
     webbrowser.open(mus[title])                 
 
+def who_am_i():
+    print("Who am I?\nWhy, I'm Yuki, silly!")
+    wait_key()
+    print("I was created on 10/09/2018, originally a simple tutorial program named example1, but like most of Miru's projects, I got a little out of hand.")
+    wait_key()
+    print("Now I can do all sorts of things, and I'm only getting better every day!")
+    wait_key()
+    print("I can do basic math, tell you the weather, play you some of Miru's favourite music, and tell you nice things to keep you going.")
+    wait_key()
+    print("I hope you'll keep me around, and update me when you can, to see what else I learn and become!")
+    wait_key()
+    print("Thank you so much for believing in me!")
+    
+    
 def cake():
     sweet = yes_no("Do you like cake?")
     if sweet == True:
