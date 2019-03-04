@@ -69,14 +69,16 @@ def commands(act):
             favourites()
         elif " random" in act:
             random_q()
-        elif ("dice roll" or "roll dice") in act:
-            dice_roll()
+        elif "dice" in act or "roll" in act:
+            dice_roll(act)
         elif "who are you" in act:
             who_am_i()
         elif " time" in act:
             time()
         elif " date" in act:
             date()
+        elif " day" in act:
+            day()
         elif "new user" in act:
             new_user()
         elif " location" in act:
@@ -107,19 +109,86 @@ def help_list():
     print("weather- I tell you the weather")
     print("favourites- I ask you about your favourite things")
     print("random- I give you a random number or thing")
-    print("dice roll- Igive you a random number from 1 to 6")
+    print("dice roll- choose from a D4, D6, D12 or D20 and I give you a number in that range")
     print("who are you- I tell you about myself")
     print("who am i- I tell you what I know about you")
     print("time- I tell you the time")
     print("date- I tell you today's date")
+    print("day- I tell you the day of the week today")
     print("new user- You tell me yout name")
     print("location- you tell me your location")
     print("heart- I draw you a heart")
     print("go back- I go back to the previous menu")
     print("leave- You make me go back to the Void")
 
-    
-#def time():
+
+def affirmation():
+    yn = 1
+    nice = [ "All things are for the eventual best", "You've got this!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata: \nIt means No Worries!", "Being afraid of things going wrong isn't the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest 'til your good is better and your better is best.", "I love you", "It always seems impossible until it's done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated.", "I believe in you.", "You have already won.\nEverything else is extra."]
+    print(random.choice(nice))
+    while yes_no("more?"):
+        print(random.choice(nice))
+
+def dice_roll(act):
+    if "4" in act:
+        dice4 = [ "1", "2", "3", "4"]
+        print("test")
+        print(random.choice(dice4))
+        while yes_no("roll again?"):
+            print(random.choice(dice4))
+    elif "6" in act:
+        dice6 = [ "1", "2", "3", "4", "5", "6"]
+        print(random.choice(dice6))
+        while yes_no("roll again?"):
+            print(random.choice(dice6))
+    elif "12" in act:
+        dice12 = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+        print(random.choice(dice12))
+        while yes_no("roll again?"):
+            print(random.choice(dice12))
+    elif "20" in act:
+        dice20 = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+        print(random.choice(dice20))
+        while yes_no("roll again?"):
+            print(random.choice(dice20))
+    else:
+        act = input("would you like to roll a D4, D6, D12, or D20 die?")
+        if "4" in act:
+            dice4 = [ "1", "2", "3", "4"]
+            print(random.choice(dice4))
+            while yes_no("roll again?"):
+                print(random.choice(dice4))
+        elif "6" in act:
+            dice6 = [ "1", "2", "3", "4", "5", "6"]
+            print(random.choice(dice6))
+            while yes_no("roll again?"):
+                print(random.choice(dice6))
+        elif "12" in act:
+            dice12 = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+            print(random.choice(dice12))
+            while yes_no("roll again?"):
+                print(random.choice(dice12))
+        elif "20" in act:
+            dice20 = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+            print(random.choice(dice20))
+            while yes_no("roll again?"):
+                print(random.choice(dice20))
+                
+        
+def time():
+    now = datetime.datetime.now()
+    print("It is currently: ")
+    print(now.strftime("%X %p %Z"))
+
+def date():
+    now = datetime.datetime.now()
+    print("Today is: ")
+    print(now.strftime("%x"))
+
+def day():
+    now = datetime.datetime.now()
+    print("Today is: ")
+    print(now.strftime("%A"))
 
 
 def weather():
