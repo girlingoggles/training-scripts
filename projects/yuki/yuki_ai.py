@@ -228,9 +228,13 @@ def new_user():
     pass
 
 def joke():
-    j = requests.get('https://icanhazdadjoke.com/')
+    j = requests.get('https://official-joke-api.appspot.com/jokes/random')
     joke = j.json()
-    print(joke)
+    setup = joke["setup"]
+    punch = joke["punchline"]
+    print(setup)
+    wait_key()
+    print(punch)
 
 def location():
      while True:
