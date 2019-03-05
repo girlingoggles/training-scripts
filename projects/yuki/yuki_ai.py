@@ -43,6 +43,8 @@ def main_menu():
             help_list() 
         #chat()
 
+        
+#Hamish's note:
 def random_q():
     pass
 
@@ -82,6 +84,8 @@ def commands(act):
             dice_roll(act)
         elif "who are you" in act:
             who_am_i()
+        elif "who am i" in act:
+            who_are_you()
         elif " time" in act:
             time()
         elif " date" in act:
@@ -92,7 +96,7 @@ def commands(act):
             new_user()
         elif " location" in act:
             location()
-        elif " heart" in act:
+        elif " heart" in act or "love" in act:
             heart()
         elif "go back" in act:
             return
@@ -204,8 +208,20 @@ def divide():
     num2 = int(input("Second number please: "))
     print(num1, "-", num2, "=", num1 / num2)
     
-#def favourite_num():
-     
+def favourite_num():
+    pass
+
+def heart():
+    print("   I love you!\n")
+    print("  .:::.   .:::.")
+    print(" :::::::.:::::::")
+    print(" :::::::::::::::")
+    print(" ':::::::::::::'")
+    print("   ':::::::::'")
+    print("     ':::::'")
+    print("       ':'")
+
+    
     
 def time():
     now = datetime.datetime.now()
