@@ -10,6 +10,7 @@ import requests
 import Profile
 import webbrowser
 import sys, os
+import urllib3
 
 
 
@@ -92,6 +93,8 @@ def commands(act):
             date()
         elif " day" in act:
             day()
+        elif "fortune" in act:
+            fortune()
         elif "new user" in act:
             new_user()
         elif " location" in act:
@@ -111,6 +114,7 @@ def commands(act):
 def help_list():
     print("These are the things I can do for you.\nPlease type 'yuki' followed by one of the following commands:  \n")
     print("affirmation- I tell you a nice thing")
+    print("fortune- I give you a fortune or saying")
     print("cake- I ask you about cake")
     print("music- I put on a youtube playlist")
     print("add- I add")
@@ -211,6 +215,37 @@ def divide():
 def favourite_num():
     pass
 
+def favourites():
+    pass
+
+def who_are_you():
+    pass
+
+def new_user():
+    pass
+
+def location():
+     while True:
+         if ("city" not in user or user["city"] == None or "country" not in user or user["country"]  == None):
+             user["city"] = input("What city are you in? \n")
+             user["country"] = input("What country are you in? Abbreviations only please \n")
+             profile.save()
+             print("You live in ", user["city"], ", ",
+                   user["country"])
+             loc = yes_no("Did I get that right?\n")
+             if (loc == True):
+                 print("Thank you, I'll remember that!")
+                 return False
+         else:
+             update= yes_no("I already have a location set for you. Would you like to update it?\n")
+             if (update == True):
+                 user["city"] = None
+                 user["country"] = None
+                 profile.save()
+             else:
+                 print("I'll remember that you live in " + user["city"], ", ", user["country"], " then!")
+                 return False
+                 
 def heart():
     print("   I love you!\n")
     print("  .:::.   .:::.")
@@ -221,7 +256,10 @@ def heart():
     print("     ':::::'")
     print("       ':'")
 
-    
+def fortune():
+    f = requests.get('http://yerkee.com/api/fortune')
+    fortune = f.json()
+    print(fortune["fortune"])
     
 def time():
     now = datetime.datetime.now()
