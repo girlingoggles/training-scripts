@@ -95,6 +95,8 @@ def commands(act):
             day()
         elif "fortune" in act:
             fortune()
+        elif "joke" in act:
+            joke()
         elif "new user" in act:
             new_user()
         elif " location" in act:
@@ -125,6 +127,7 @@ def help_list():
     print("speak number- I spell out a number")
     print("weather- I tell you the weather")
     print("favourites- I ask you about your favourite things")
+    print("joke- I tell you a joke")
     print("random- I give you a random number or thing")
     print("dice roll- choose from a D4, D6, D12 or D20 and I give you a number in that range")
     print("who are you- I tell you about myself")
@@ -224,6 +227,11 @@ def who_are_you():
 def new_user():
     pass
 
+def joke():
+    j = requests.get('https://icanhazdadjoke.com/')
+    joke = j.json()
+    print(joke)
+
 def location():
      while True:
          if ("city" not in user or user["city"] == None or "country" not in user or user["country"]  == None):
@@ -254,8 +262,9 @@ def heart():
     print(" ':::::::::::::'")
     print("   ':::::::::'")
     print("     ':::::'")
-    print("       ':'")
-
+    print("       ':'\n")
+    print("I hope you don't mind.")
+    
 def fortune():
     f = requests.get('http://yerkee.com/api/fortune')
     fortune = f.json()
