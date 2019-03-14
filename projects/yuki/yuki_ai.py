@@ -32,17 +32,34 @@ def yes_no(question):
 def main_menu():
     print("Hi! My name is Yuki. I'm here to help")
     get_user()
-    print("Hello " + user["name"])
     run = True
     while run:
         act = input()
         act = act.lower()
-#should command be an array or a function call?    
-#    command = (['affirmation', 'cake', 'music', 'add', 'subtract', 'multiply', 'divide', 'favourite number', 'speak number', 'weather', 'favourites', 'random', 'dice roll', 'roll dice', 'who am i', 'time', 'date', 'new user', 'location', 'heart', 'go back', 'leave', 'help'])
+        hi = set(['hi', 'hello', 'hey', 'yo', 'ey', 'yo', 'hiyo'])
+        bye = set(['bye', 'goodbye', 'see you', 'see ya', 'later'])
+        night = set(['night', 'good night', 'sleep well'])
+        splt = act.split()
+        if act in hi:
+            print("Hi " + user["name"] + "! It's good to see you.")
+            h = yes_no("Do you need help?")
+            if (h == True):
+                help_list()
+            else:
+                pass
+        else:
+            pass    
         run = commands(act)
         if "help" in act:
             help_list() 
         #chat()
+        if act in bye:
+            print("Bye! See you soon! ♥")
+            return False
+        if act in night:
+            print("Good night! \nSleep well and have sweet dreams,\nI'll see you later ♥")
+            return False
+
 
         
 #Hamish's note:
@@ -71,8 +88,8 @@ def commands(act):
             multiply()
         elif " divide" in act:
             divide()
-        elif " favourite number" in act:
-            favourite_num()
+       # elif " favourite number" in act:
+        #    favourite_num()
         elif " speak number" in act:
             speak_number.main_menu()
         elif " weather" in act:
@@ -101,7 +118,9 @@ def commands(act):
             new_user()
         elif " location" in act:
             location()
-        elif " heart" in act or "love" in act:
+        elif "iss" in act:
+            iss()
+        elif "heart" in act or "love" in act:
             heart()
         elif "go back" in act:
             return
@@ -109,6 +128,10 @@ def commands(act):
             return leave()
         elif " help" in act:
             help_list()
+        elif "can" in act:
+            print("I don't know, CAN you?")
+        elif "potato" in act:
+            potato()
         else:
             print("I'm sorry, I don't know how to do that yet")
     return True
@@ -123,7 +146,6 @@ def help_list():
     print("subtract- I subtract")
     print("multiply- I multiply")
     print("divide- I divide")
-    print("favourite number- I ask your favourite number")
     print("speak number- I spell out a number")
     print("weather- I tell you the weather")
     print("favourites- I ask you about your favourite things")
@@ -137,6 +159,7 @@ def help_list():
     print("day- I tell you the day of the week today")
     print("new user- You tell me yout name")
     print("location- you tell me your location")
+    print("iss- I tell you the current location of the International Space Station")
     print("heart- I draw you a heart")
     print("go back- I go back to the previous menu")
     print("leave- You make me go back to the Void")
@@ -257,7 +280,48 @@ def location():
              else:
                  print("I'll remember that you live in " + user["city"], ", ", user["country"], " then!")
                  return False
-                 
+
+def iss():
+    #pass
+    l = requests.get('http://api.open-notify.org/iss-now.json')
+    loc = l.json()
+    lat = loc["iss_position"]["latitude"]
+    lon = loc["iss_position"]["longitude"]
+    print("The ISS is curently located at:\nLatitude: ", lat, "\nLongitude: ", lon)
+
+def potato():
+    print("                                            ▓▓            ")
+    print("                                          ████            ")
+    print("                                        ██  ██      ██    ")
+    print("                                      ██    ████████      ")
+    print("                                    ██            ██      ")
+    print("                                      ██          ██      ")
+    print("                            ██████      ██        ████████")
+    print("                      ████████▒▒██████    ██          ██  ")
+    print("                    ████▒▒▒▒▒▒▒▒▒▒▒▒▒▒████  ██      ██    ")
+    print("                ████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██  ██  ██      ")
+    print("                ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒██  ██        ")
+    print("              ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒██            ")
+    print("            ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒██          ")
+    print("    ██████████▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██          ")
+    print("  ██▒▒▒▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒████        ")
+    print("██▒▒▒▒▒▒████▒▒▒▒▒▒▒▒██▒▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▒▒██      ")
+    print("██▒▒████  ██▒▒▒▒▒▒▒▒████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████▒▒▒▒██    ")
+    print("████    ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██  ██▒▒██    ")
+    print("        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██    ██▒▒██    ")
+    print("        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████      ██▒▒██    ")
+    print("          ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████████          ████      ")
+    print("          ██████▒▒▒▒▒▒▒▒▒▒▒▒██▒▒▒▒██                      ")
+    print("        ██▒▒▒▒▒▒████████████▒▒▒▒▒▒▒▒██                    ")
+    print("        ██▒▒▒▒▒▒██          ██▒▒▒▒▒▒██                    ")
+    print("        ████████            ██▒▒▒▒▒▒██                    ")
+    print("                              ██████                      ")
+
+
+
+
+
+    
 def heart():
     print("   I love you!\n")
     print("  .:::.   .:::.")
@@ -362,7 +426,7 @@ def wait_key():
 def music(act):
 
     if len(profile.music) < 1:
-        profile.music = {"lofi": "https://www.youtube.com/watch?v=dJhW1J6gIWA", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
+        profile.music = {"lofi": "https://www.youtube.com/watch?v=y3Z8ot_4HX4", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
         profile.save()
     mus = profile.music
     words = act.split()
@@ -371,9 +435,8 @@ def music(act):
         if word in mus:
             title = word
             print("Found " + word + " in music")
-            
-    if title == "":
-        print("these are the things i can play: ")
+            if title == "":
+                print("these are the things i can play: ")
         songs = list(mus.keys())
         for song_list in songs:
             if song_list == songs[-1]:
