@@ -37,8 +37,6 @@ def main_menu():
         act = input()
         act = act.lower()
         hi = set(['hi', 'hello', 'hey', 'yo', 'ey', 'yo', 'hiyo'])
-        bye = set(['bye', 'goodbye', 'see you', 'see ya', 'later'])
-        night = set(['night', 'good night', 'sleep well'])
         splt = act.split()
         if act in hi:
             print("Hi " + user["name"] + "! It's good to see you.")
@@ -50,6 +48,14 @@ def main_menu():
         else:
             pass    
         run = commands(act)
+        if "yuki" not in act:
+            chat(act)
+
+
+def chat(act):
+
+        bye = set(['bye', 'goodbye', 'see you', 'see ya', 'later'])
+        night = set(['night', 'good night', 'sleep well'])
         if "help" in act:
             help_list() 
         #chat()
@@ -58,10 +64,8 @@ def main_menu():
             return False
         if act in night:
             print("Good night! \nSleep well and have sweet dreams,\nI'll see you later ♥")
-            return False
+            return False   
 
-
-        
 #Hamish's note:
 def random_q():
     pass
@@ -290,6 +294,7 @@ def iss():
     print("The ISS is curently located at:\nLatitude: ", lat, "\nLongitude: ", lon)
 
 def potato():
+    print("I like potatoes ^.^")
     print("                                            ▓▓            ")
     print("                                          ████            ")
     print("                                        ██  ██      ██    ")
