@@ -42,29 +42,25 @@ def main_menu():
             print("Hi " + user["name"] + "! It's good to see you.")
             h = yes_no("Do you need help?")
             if (h == True):
-                help_list()
-            else:
-                pass
-        else:
-            pass    
-        run = commands(act)
-        if "yuki" not in act:
-            chat(act)
+                act = act + str("yuki help")
+        run = commands(act, run)
 
 
-def chat(act):
 
-        bye = set(['bye', 'goodbye', 'see you', 'see ya', 'later'])
-        night = set(['night', 'good night', 'sleep well'])
-        if "help" in act:
-            help_list() 
-        #chat()
-        if act in bye:
-            print("Bye! See you soon! ♥")
-            return False
-        if act in night:
-            print("Good night! \nSleep well and have sweet dreams,\nI'll see you later ♥")
-            return False   
+def chat(act, run):
+    run = True
+    bye = set(['bye', 'goodbye', 'see you', 'see ya', 'later'])
+    night = set(['night', 'good night', 'sleep well'])
+    if "help" in act:
+        help_list() 
+        return True
+    elif act in bye:
+        print("Bye! See you soon! ♥")
+        exit(0)
+    elif act in night:
+        print("Good night! \nSleep well and have sweet dreams,\nI'll see you later ♥")
+        exit(0)  
+
 
 #Hamish's note:
 def random_q():
@@ -75,10 +71,12 @@ def random_q():
     #except NameError as e:
     #    print(e)
         
-def commands(act):
+def commands(act, run):
     if "yuki" in act:
 #need to parse act
-        if " affirmation" in act:
+        if "can i" in act:
+            print("I don't know, CAN you?") 
+        elif "affirmation" in act:
             affirmation()
         elif " cake" in act: #this one looks better
             cake()
@@ -132,13 +130,16 @@ def commands(act):
             return leave()
         elif " help" in act:
             help_list()
-        elif "can" in act:
-            print("I don't know, CAN you?")
         elif "potato" in act:
             potato()
-        else:
+        else: 
             print("I'm sorry, I don't know how to do that yet")
+    else:
+        chat(act, run)
+            
     return True
+    #else:
+     #   chat(act, run)
             
 def help_list():
     print("These are the things I can do for you.\nPlease type 'yuki' followed by one of the following commands:  \n")
