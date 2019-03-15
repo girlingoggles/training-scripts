@@ -11,6 +11,7 @@ import Profile
 import webbrowser
 import sys, os
 import urllib3
+from geopy.geocoders import Nominatim
 
 
 
@@ -43,23 +44,11 @@ def main_menu():
             h = yes_no("Do you need help?")
             if (h == True):
                 act = act + str("yuki help")
-        run = commands(act, run)
+        run = commands(act)
 
 
 
-def chat(act, run):
-    run = True
-    bye = set(['bye', 'goodbye', 'see you', 'see ya', 'later'])
-    night = set(['night', 'good night', 'sleep well'])
-    if "help" in act:
-        help_list() 
-        return True
-    elif act in bye:
-        print("Bye! See you soon! ♥")
-        exit(0)
-    elif act in night:
-        print("Good night! \nSleep well and have sweet dreams,\nI'll see you later ♥")
-        exit(0)  
+
 
 
 #Hamish's note:
@@ -71,7 +60,7 @@ def random_q():
     #except NameError as e:
     #    print(e)
         
-def commands(act, run):
+def commands(act):
     if "yuki" in act:
 #need to parse act
         if "can i" in act:
@@ -135,12 +124,26 @@ def commands(act, run):
         else: 
             print("I'm sorry, I don't know how to do that yet")
     else:
-        chat(act, run)
+        chat(act)
             
     return True
-    #else:
-     #   chat(act, run)
-            
+    
+
+def chat(act):
+
+    bye = set(['bye', 'goodbye', 'see you', 'see ya', 'later'])
+    night = set(['night', 'good night', 'goodnight', 'sleep well'])
+    if "help" in act:
+        help_list() 
+    elif act in bye:
+        print("Bye! See you soon! ♥")
+        exit(0)
+    elif act in night:
+        print("Good night! \nSleep well and have sweet dreams,\nI'll see you later ♥")
+        exit(0)  
+
+
+    
 def help_list():
     print("These are the things I can do for you.\nPlease type 'yuki' followed by one of the following commands:  \n")
     print("affirmation- I tell you a nice thing")
@@ -290,9 +293,12 @@ def iss():
     #pass
     l = requests.get('http://api.open-notify.org/iss-now.json')
     loc = l.json()
-    lat = loc["iss_position"]["latitude"]
-    lon = loc["iss_position"]["longitude"]
+    lat = float(loc["iss_position"]["latitude"])
+    lon = float(loc["iss_position"]["longitude"])
     print("The ISS is curently located at:\nLatitude: ", lat, "\nLongitude: ", lon)
+    geolocator = Nominatim(timeout=10)
+    location = geolocator.reverse(lat, lon)
+    print(location.address)
 
 def potato():
     print("I like potatoes ^.^")
