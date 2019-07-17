@@ -25,17 +25,21 @@ function main_menu () {
     while (( !all_done )); do
     echo "Would you like to:"
     echo "chat"
+    echo "weather"
     echo "affirmation"
     echo "math"
+    echo "guessing game"
     echo "cake"
     echo "music"
     echo "leave"
     read -p "Please choose one:" answer
     
     case $answer in
-        Chat | chat) have_chat ;;        
+        Chat | chat) have_chat ;;    
+        Weather | weather) weather ;;    
         Math | math) number_loop ;;
         Affirmation | affirmation) affirmation ;;
+        Game | game | guess | Guess) guess_game ;;
         Cake | cake) cake ;;
         Music | music) music ;;
         Leave | leave) leave ;;
@@ -78,11 +82,20 @@ function have_chat () {
     if [[ $? == 1 ]] ; then
     echo "today is $(date '+%A %D') !"
     echo "and I think you're awesome"
+    yes_no "would you like to see what I look like?"
+    if [[ $? == 1 ]] ; then
+        xdg-open ./yhappy.png 
+    fi
     echo "Thanks for talking to me!"
     echo " "
     else echo "Well, that went well."
      echo " "
     fi
+}
+
+function weather (){
+    read -p "What city are you in?" city
+    curl wttr.in/$city
 }
 
 function affirmation () {
@@ -104,6 +117,29 @@ function affirmation () {
     echo "Remember how far you've come, not just how far you have to go. \n You are not where you want to be, but neither are you where you used to be"
     echo " "
 }
+
+function guess_game () {
+    error=0
+    num=$((1 + RANDOM % 10))
+    while [ 1 ]
+    do
+        read -p "Guess a number from 1 to 10!" ans
+        if [[ and == num ]] ; then
+         echo "You guessed right!"
+        else
+            read -p "Sorry, guess again"
+           ((error++))
+        if [[ $error -eq 3 ]] ; then
+            echo "Sorry, you lose"
+            return 0
+        fi
+    fi
+done
+
+
+
+}
+
 
 function cake () {
     yes_no "Do you like cake?"
