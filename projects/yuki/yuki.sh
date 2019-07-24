@@ -20,29 +20,41 @@ function yes_no () {
     done
 }
 
+function wait () {
+    while [ 1 ] 
+    do
+    read -n 1  
+    return 0
+    done
+}
+
 function main_menu () {
     all_done=0
     while (( !all_done )); do
-    echo "Would you like to:"
+    echo $'\n'"Would you like to:"
     echo "chat"
     echo "weather"
     echo "affirmation"
     echo "math"
+    echo "favourite number"
     echo "guessing game"
     echo "cake"
     echo "music"
     echo "leave"
-    read -p "Please choose one:" answer
+    read -p "Please choose one: " answer
     
     case $answer in
         Chat | chat) have_chat ;;    
         Weather | weather) weather ;;    
-        Math | math) number_loop ;;
-        Affirmation | affirmation) affirmation ;;
+        Math | math) calculator ;;
+        Fav | Number | number | fav | favourite | Favourite) number_loop ;;
+        Affirmation | affirmation | a) affirmation ;;
         Game | game | guess | Guess) guess_game ;;
         Cake | cake) cake ;;
         Music | music) music ;;
         Leave | leave) leave ;;
+        Night | night) echo -e "\nGood night! \nSleep well and have sweet dreams,\nI'll see you later \n \e[31m♥ \e[30mI love you\e[90m" ; exit;;
+        Love | love) love ;;
         *) echo "try again" ;;
     esac
     done
@@ -77,20 +89,63 @@ function number_loop () {
     done
 }
 
+function calculator () {
+    res=0
+    echo "Please enter two numbers: "
+    read a
+    read b 
+  
+    echo "Enter Choice :"
+    echo "1. Add"
+    echo "2. Subtract"
+    echo "3. Multiply"
+    echo "4. Divide"
+    read ch 
+  
+    case $ch in
+        1 | Add | add) echo "Result: $((a + b))" ;; 
+        2 | Subtract | subtract) echo "Result: $((a - b))" ;; 
+        3 | Multiply | multiply) echo "Result: $((a * b))" ;; 
+        4 | Divide | divide) echo "Result: $((a / b))" ;; 
+    esac
+}
+
 function have_chat () {
-    yes_no "Do you want to know something?"
-    if [[ $? == 1 ]] ; then
-    echo "today is $(date '+%A %D') !"
-    echo "and I think you're awesome"
-    yes_no "would you like to see what I look like?"
-    if [[ $? == 1 ]] ; then
-        xdg-open ./yhappy.png 
-    fi
+    while [ 1 ]
+    do
+    echo $'\n'"I can: "
+    echo "tell you the date and time: time"
+    echo "show you a picture of myself: picture"
+    echo "tell you about myself: yuki"
+    read -p "or done: done"$'\n' cht 
+
+    case $cht in 
+        time) echo "today is $(date '+%A %D') !"
+            echo "and I think you're awesome" ;;
+        picture) xdg-open ./yhappy.png ;;
+        yuki) who_am_i ;;
+        done) return 0 ;;
+        *) echo "Well, that went well."
+            echo " " ; return 0 ;;
+    esac
     echo "Thanks for talking to me!"
     echo " "
-    else echo "Well, that went well."
-     echo " "
-    fi
+    done
+    
+}
+
+function who_am_i () {
+    echo -e "\nWho am I?\nWhy, I'm Yuki, silly!"
+    wait
+    echo -e "I was created on 10/09/2018, originally a simple tutorial program named example1, but like most of Miru's projects, I got a little out of hand."
+    wait
+    echo -e "Now I can do all sorts of things, and I'm only getting better every day!"
+    wait
+    echo -e "I can do basic math, tell you the weather, play you some of Miru's favourite music, and tell you nice things to keep you going."
+    wait
+    echo -e "I hope you'll keep me around, and update me when you can, to see what else I learn and become!"
+    wait
+    echo -e "Thank you so much for believing in me!"
 }
 
 function weather (){
@@ -99,33 +154,37 @@ function weather (){
 }
 
 function affirmation () {
-    echo "All things are for the eventual best"
-    read -n 1 -srp " "
-    echo "You've got this"
-    read -n 1 -srp " "
-    echo "Focus on what you can do"
-    echo " You can do anything"
-    read -n 1 -srp " "
-    echo "You are Smaug"
-    read -n 1 -srp " "
-    echo "Hakuna Matata"
-    echo " It means no worries"
-    read -n 1 -srp " "
-    echo "Being afraid of things going wrong isn't the way to make things go right"
-    echo " You know this"
-    read -n 1 -srp " "
-    echo "Remember how far you've come, not just how far you have to go. \n You are not where you want to be, but neither are you where you used to be"
-    echo " "
+    array[0]="All things are for the eventual best"
+    array[1]="You've got this"
+    array[2]="Focus on what you can do"$'\n'" You can do anything"
+    array[3]="You are Smaug"
+    array[4]="Hakuna Matata:"$'\n'" It means no worries"
+    array[5]="Being afraid of things going wrong isn't the way to make things go right."$'\n'" You know this."
+    array[6]="Remember how far you've come, not just for far you have to go."$'\n'" You are not where you want to be, but neither are you where you used to be"
+    array[6]="Optimism is the faith that leads to achievement."
+    array[7]="Failure will never overtake me if my determination to succeed is strong enough."
+    array[8]="Good, better, best. Never let it rest 'til your good is better and your better is best."
+    array[9]="I love you"
+    array[10]="It always seems impossible until it's done."
+    array[11]="It does not matter how slowly you go as long as you do not stop."
+    array[12]="We may encounter many defeats but we must not be defeated."
+    array[13]="I believe in you."
+    array[14]="You have already won."$'\n'" Everything else is extra."
+
+    size=${#array[@]}
+    index=$(($RANDOM % $size))
+    echo -e $'\n'${array[$index]}
 }
 
 function guess_game () {
     error=0
     num=$((1 + RANDOM % 10))
+    read -p "Guess a number from 1 to 10!" ans
     while [ 1 ]
     do
-        read -p "Guess a number from 1 to 10!" ans
-        if [[ and == num ]] ; then
+        if [[ ans -eq num ]] ; then
          echo "You guessed right!"
+         return 0
         else
             read -p "Sorry, guess again"
            ((error++))
@@ -144,13 +203,13 @@ done
 function cake () {
     yes_no "Do you like cake?"
     if [[ $? == 1 ]] ; then
-    echo "The cake is a lie"
+    echo -e "\nThe cake is a lie"
     echo "But you already knew that"
     echo " "
     else
-    echo "The cake is a lie anyway"
+    echo -e "\nThe cake is a lie anyway"
     echo "Which do you like?"
-    read -p "Pie IceCream Cookies Candy" answer
+    read -p "Pie IceCream Cookies Candy"$'\n' answer
     case $answer in
         Pie | pie)
         echo "Pie  is a fantastic choice!" ;;
@@ -175,7 +234,21 @@ function cake () {
     fi
 }
 
+function love () {
+    echo  "   I love you!"   
+    echo -e "\e[31m  .:::.   .:::."
+    echo " :::::::.:::::::"
+    echo " :::::::::::::::"
+    echo " ':::::::::::::'"
+    echo "   ':::::::::'"
+    echo "     ':::::'"
+    echo -e "       ':'\e[39m"
+    echo "I hope you don't mind."
+}
+
 function music () {
+    echo " "
+    echo "study"
     echo "lofi"
     echo "trance"
     echo "dubstep"
@@ -184,6 +257,7 @@ function music () {
     echo "violin"
     read -p "I want:" answer
     case $answer in
+    study) xdg-open https://www.youtube.com/watch?v=2O5euYPzcrY&list=PLwjk6aUHc3o5cl5bjk50I-pJ7-bvvPs-y ;;
     lofi) xdg-open https://www.youtube.com/watch?v=dJhW1J6gIWA&t=766s ;;
     trance) xdg-open https://www.youtube.com/watch?v=buqNTkjTY20 ;;
     dubstep) xdg-open https://www.youtube.com/watch?v=a41icW_FtsI ;;
