@@ -1,0 +1,24 @@
+ print("These are the things I can do for you: ")
+ print("affirmation- I tell you a nice thing")
+ print("cake- I ask you about cake")
+ ----print("music- I put on a youtube playlist")
+ print("add- I add")
+ print("subtract- I subtract"
+ print("multiply- I multiply")
+ print("divide- I divide"
+ print("favourite number- I ask your favourite number")
+ print("speak number- I spell out a number")
+---- print("weather- I tell you the weather")
+ print("favourites- I ask you about your favourite things")
+ print("random- I give you a random number or thing")
+ print("dice roll- Igive you a random number from 1 to 6")
+ print("who are you- I tell you about myself")
+ print("who am i- I tell you what I know about you")
+ ----print("time- I tell you the time")
+ ----print("date- I tell you today's date")
+ print("new user- You tell me yout name"
+ print("location- you tell me your location")
+ print("heart- I draw you a heart")
+ print("go back- I go back to the previous menu")
+----print("leave- You make me go back to the Void")
+											 

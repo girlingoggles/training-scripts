@@ -1,0 +1,3 @@
+spare or old yuki_ai,py code:
+
+    print("favourite number- I ask your favourite number")

@@ -1,9 +1,8 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #this is Yuki. She's here to help. Please be patient, she's learning.
 #Yuki is made by girlingoggles
 
 import datetime
-from datetime import datetime
 import random
 import speak_number
 from pprint import pprint
@@ -14,11 +13,17 @@ import sys, os
 import urllib3
 from geopy.geocoders import Nominatim
 from colorama import Fore, Style
-import numpy as np
-from mpl_toolkits.basemap import Basemap
-import matplotlib.pyplot as plt
+import socket
 
 
+ircsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server = "chat.freenode.net" # Server
+channel = "#Yuki_test" # Channelt
+botnick = "YukichanOo" # Your bots nick
+adminname = "MiruTheElfling"
+ircsock.connect((server, 6667))
+ircsock.send(bytes("USER "+ botnick +" "+ botnick +" "+ botnick + " " + botnick + "\n", "UTF-8"))
+ircsock.send(bytes("NICK " + botnick + "\n", "UTF-8"))
 
 def yes_no(question):
     yes = set(['yes', 'y', 'ye', 'yea', 'yeah', 'yep', 'yup', 'ya', ' '])
@@ -36,19 +41,18 @@ def yes_no(question):
            
 
 def main_menu():
+    joinchan(channel)
     print("Hi! My name is Yuki. I'm here to help")
     get_user()
     run = True
     while run:
         act = input()
         act = act.lower()
-        hi = set(['hi', 'hello', 'hey', 'yo', 'ey', 'yo', 'hiyo', 'hiya'])
+        hi = set(['hi', 'hello', 'hey', 'yo', 'ey', 'yo', 'hiyo'])
         splt = act.split()
-        if "override" in act:
-            pass
-        elif act in hi:
+        if act in hi:
             print("Hi " + user["name"] + "! It's good to see you.")
-            h = yes_no("Do you need help? ")
+            h = yes_no("Do you need help?")
             if (h == True):
                 act = act + str("yuki help")
         run = commands(act)
@@ -128,10 +132,6 @@ def commands(act):
             help_list()
         elif "potato" in act:
             potato()
-        elif " map" in act:
-            maps()
-        elif "mycommands" in act:
-            mycommands()
         else: 
             print(Fore.MAGENTA + "I'm sorry, I don't know how to do that yet" + Style.RESET_ALL)
     else:
@@ -144,9 +144,7 @@ def chat(act):
 
     bye = set(['bye', 'goodbye', 'see you', 'see ya', 'later'])
     night = set(['night', 'good night', 'goodnight', 'sleep well'])
-    sleep = set(['sleep', 'nap'])
-    thx = set(['thanks', 'thank you', 'thx', 'ty'])
-    if "help" in act or "what" in act:
+    if "help" in act:
         help_list() 
     elif act in bye:
         print("Bye! See you soon! " + Fore.RED + "♥" + Style.RESET_ALL)
@@ -156,11 +154,6 @@ def chat(act):
         print("Good night! \nSleep well and have sweet dreams,\nI'll see you later " + Fore.RED + "♥" + Style.RESET_ALL)
         print(Fore.BLACK + "I love you" + Style.RESET_ALL)
         exit(0)  
-    elif act in sleep:
-        print("Is it time to sleep? Ok. Please let me know when you need me again.")
-    elif act in thx:
-        print("No problem!")
-
 
 
     
@@ -180,12 +173,12 @@ def help_list():
     print("joke- " + Fore.BLUE + "I tell you a joke" + Style.RESET_ALL)
     print("random- " + Fore.BLUE + "I give you a random number or thing" + Style.RESET_ALL)
     print("dice roll- " + Fore.BLUE + "choose from a D4, D6, D12 or D20 and I give you a number in that range" + Style.RESET_ALL)
-    #print("who are you- " + Fore.BLUE + "I tell you about myself" + Style.RESET_ALL)
+    print("who are you- " + Fore.BLUE + "I tell you about myself" + Style.RESET_ALL)
     print("who am i- " + Fore.BLUE + "I tell you what I know about you" + Style.RESET_ALL)
     print("time- " + Fore.BLUE + "I tell you the time" + Style.RESET_ALL)
     print("date- " + Fore.BLUE + "I tell you today's date" + Style.RESET_ALL)
     print("day- " + Fore.BLUE + "I tell you the day of the week today" + Style.RESET_ALL)
-    print("new user- " + Fore.BLUE + "You tell me your name" + Style.RESET_ALL)
+    print("new user- " + Fore.BLUE + "You tell me yout name" + Style.RESET_ALL)
     print("location- " + Fore.BLUE + "you tell me your location" + Style.RESET_ALL)
     print("iss- " + Fore.BLUE + "I tell you the current location of the International Space Station" + Style.RESET_ALL)
     print("heart- " + Fore.BLUE + "I draw you a heart" + Style.RESET_ALL)
@@ -195,7 +188,7 @@ def help_list():
 
 def affirmation():
     yn = 1
-    nice = [ "All things are for the eventual best", "You've got this!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata: \nIt means No Worries!", "Being afraid of things going wrong isn't the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest 'til your good is better and your better is best.", "I love you", "It always seems impossible until it's done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated.", "I believe in you.", "You have already won.\nEverything else is extra.", ""]
+    nice = [ "All things are for the eventual best", "You've got this!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata: \nIt means No Worries!", "Being afraid of things going wrong isn't the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest 'til your good is better and your better is best.", "I love you", "It always seems impossible until it's done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated.", "I believe in you.", "You have already won.\nEverything else is extra."]
     print(random.choice(nice))
     while yes_no("more?"):
         print(random.choice(nice))
@@ -275,7 +268,8 @@ def favourites():
 def who_are_you():
     pass
 
-
+def new_user():
+    pass
 
 def joke():
     j = requests.get('https://official-joke-api.appspot.com/jokes/random')
@@ -551,7 +545,7 @@ def leave():
         print("Goodbye then. I'm glad you stopped by.")
         print("I hope I'll see you again soon.")
         print(Fore.BLACK + "I love you" + Style.RESET_ALL)
-        exit(0)
+        return False
     else:
         print("I'm glad you can stay with me for a little longer.")
         print("What would you like to do now?")
@@ -560,59 +554,10 @@ def leave():
 
 def affirmation():
     yn = 1
-    nice = [ "All things are for the eventual best", "You've got this!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata: \nIt means No Worries!", "Being afraid of things going wrong isn't the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest 'til your good is better and your better is best.", "I love you", "It always seems impossible until it's done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated.", "I believe in you.", "You have already won. \nEverything else is extra.", "You are the architect of your life;\nYoubuild its foundation and choose its contents.", "You are superior to negative thoughts and low actions.", "You have been given endless talenta which you begin to utilize today", "A river of compassion washes away your anger\nand replaces it with love.", "You possess the qualities to be extremely successful.", "Happiness is a choice.", "You deserve to be paid for your time, efforts and ideas. Every day, you are closer to finding the job perfect for you.", "Be brave.", "You are indestructible.", "I love you because the entire universe conspired to help me find you.", "When you want something, all the universe conspires in helping you to achieve it.", "One is loved because one is loved. No reason is needed for loving.", "There is only one thing that makes a dream impossible to achieve:\nthe fear of failure.", "The secret of life, though, is to fall seven times and to get up eight times.", "Remember that wherever your heart is, there you will find your treasure.", "You failed. \nGood. now go fail again."]
+    nice = [ "All things are for the eventual best", "You've got this!", "Focus on what you can do, and you can do anything.", "You are Smaug", "Hakuna Matata: \nIt means No Worries!", "Being afraid of things going wrong isn't the way to make things go right. \nYou know this.", "Remember how far you've come, not just for far you have to go. \nYou are not where you want to be, but neither are you where you used to be", "Optimism is the faith that leads to achievement.", "Failure will never overtake me if my determination to succeed is strong enough.", "Good, better, best. Never let it rest 'til your good is better and your better is best.", "I love you", "It always seems impossible until it's done.", "It does not matter how slowly you go as long as you do not stop.", "We may encounter many defeats but we must not be defeated.", "I believe in you.", "You have already won. \nEverything else is extra."]
     print(random.choice(nice))
     while yes_no("more?"):
         print(random.choice(nice))
-
-def maps():
-    # miller projection
-    map = Basemap(projection='mill',lon_0=180)
-    # plot coastlines, draw label meridians and parallels.
-    map.drawcoastlines()
-    map.drawparallels(np.arange(-90,90,30),labels=[1,0,0,0])
-    map.drawmeridians(np.arange(map.lonmin,map.lonmax+30,60),labels=[0,0,0,1])
-    # fill continents 'coral' (with zorder=0), color wet areas 'aqua'
-    map.drawmapboundary(fill_color='aqua')
-    map.fillcontinents(color='coral',lake_color='aqua')
-    # shade the night areas, with alpha transparency so the
-    # map shows through. Use current time in UTC.
-    date = datetime.utcnow()
-    CS=map.nightshade(date)
-    plt.title('Day/Night Map for %s (UTC)' % date.strftime("%d %b %Y %H:%M:%S"))
-    plt.show()
-
-
-
-def mycommands():
-    if yes_no("delete user data?"):
-        os.remove("yuki.dmp")
-        print("dmp file removed")
-    elif yes_no("print users?"):
-        profile.list_users()
-    elif yes_no("choose new default user?"):
-        profile.list_users()
-        username = input("please pick from the list of users")
-        user = profile.get_user(username)
-    elif yes_no(""):
-        pass
-
-def new_user():
-    global user
-    while True:
-        if yes_no("Would you like to add a new user?"):
-            usrnm = input("What is the new user's name?")
-            user = profile.add_user({"name" : usrnm})
-            usnm = yes_no("Hi " + user["name"] + "! \nDid I get that right?\n")
-            if (usnm == True):
-                print("Nice to meet you " + user["name"] + "!")
-                return False
-        else:
-            print("Let me know if you want to add a new user later") 
-            return False
-
-
-
 
 def get_user():
 
@@ -622,7 +567,6 @@ def get_user():
         print("I don't know anyone, yet")
         username = input("What's your name? ")
         user = profile.add_user({"name" : username})
-        print("Nice to meet you " + user["name"] + "!")
     elif (profile.defaultuser != None and profile.defaultuser != ""):
         user = profile.get_user(profile.defaultuser);
     else:
@@ -634,7 +578,21 @@ def get_user():
             if (user == None):
                 print("please enter one of the usernames listed")
 
-                
+
+def joinchan(chan): # join channel(s).
+  ircsock.send(bytes("JOIN "+ chan +"\n", "UTF-8")) 
+  ircmsg = ""
+  while ircmsg.find("End of /NAMES list.") == -1:  
+    ircmsg = ircsock.recv(2048).decode("UTF-8")
+    ircmsg = ircmsg.strip('\n\r')
+    print(ircmsg)
+           
+def ping(): # respond to server Pings.
+  ircsock.send(bytes("PONG :pingis\n", "UTF-8"))
+
+def sendmsg(msg, target=channel): # sends messages to the target.
+  ircsock.send(bytes("PRIVMSG "+ target +" :"+ msg +"\n", "UTF-8"))
+
                 
 profile = Profile.Profile("yuki.dmp")
 user = None
