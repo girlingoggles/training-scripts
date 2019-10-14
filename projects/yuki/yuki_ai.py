@@ -17,6 +17,8 @@ from colorama import Fore, Style
 import numpy as np
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
+#from gooey import Gooey
+import guessgame
 
 
 
@@ -34,7 +36,7 @@ def yes_no(question):
     else:
         print("\nyes or no only, please.\n")
            
-
+#@Gooey
 def main_menu():
     print("Hi! My name is Yuki. I'm here to help")
     get_user()
@@ -90,6 +92,8 @@ def commands(act):
         #    favourite_num()
         elif " speak number" in act:
             speak_number.main_menu()
+        elif " guessing game" in act:
+            guessgame.main_menu()
         elif " weather" in act:
             weather()
         elif " favourites" in act:
@@ -114,10 +118,17 @@ def commands(act):
             joke()
         elif "new user" in act:
             new_user()
+        elif "change user" in act:
+            change_user()
         elif " location" in act:
             location()
         elif "iss" in act:
             iss()
+        elif "hamish" in act or "love me" in act:
+            if user["name"] == "Hamish" or user["name"] == "Lucy":
+                hamish()
+            else:
+                print("No, thank you")
         elif "heart" in act or "love" in act:
             heart()
         elif "go back" in act:
@@ -130,6 +141,8 @@ def commands(act):
             potato()
         elif " map" in act:
             maps()
+        elif "guessing game" in act:
+            guessgame()
         elif "mycommands" in act:
             mycommands()
         else: 
@@ -162,7 +175,8 @@ def chat(act):
         print("No problem!")
 
 
-
+def guessgame():
+    pass
     
 def help_list():
     print("These are the things I can do for you.\nPlease type 'yuki' followed by one of the following commands:  \n")
@@ -318,6 +332,15 @@ def iss():
     geolocator = Nominatim(timeout=10)
     location = geolocator.reverse(lat, lon)
     print(location.address)
+    print("If you would like to see this on a map, ask yuki for a map.")
+
+def hamish():
+    yn = 1
+    words = ["I love you because of the way you smile, \nThe way you lock eyes with mine", "I love you because of the way you move, \nWith precision, power, and grace", "I love you because of the way you hug me when you want to hold me close, \nLike I'm the only person in the world who can save you from the waves", "I love you because of how innocent you look \nWhen you're just waking up in the morning", "I love you because of the little kisses you give me when you know I'm having a hard time, \nOr you're saying good night", "I love you because holding your hand calms my storms", "I love you because your music makes me want to cry", "I love you because of all the little ways in which you watch out for me, \nEven when I say I'm fine", "I love you because of the way you look when you're concentrating on something you love", "I love you for your excitement when you're showing me something you made", "I love you because of your eyes, \nThe way you light up the room when you smile", "I love you because you are the ground under my tired wings, \nThe stable stone beneath my flighty feet", "I love you because you're you", "I love you just because I do"]
+    if yes_no("Would you like to know why I love you? "):
+        print(random.choice(words))
+        while yes_no("Do you need another reason? "):
+            print(random.choice(words))
 
 def potato():
     print("I like potatoes ^.^")
@@ -457,7 +480,7 @@ def wait_key():
 def music(act):
 
     if len(profile.music) < 1:
-        profile.music = {"lofi": "https://www.youtube.com/watch?v=y3Z8ot_4HX4", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RD\EMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
+        profile.music = {"lofi": "https://www.youtube.com/watch?v=y3Z8ot_4HX4", "trance": "https://www.youtube.com/watch?v=buqNTkjTY20", "dubstep": "https://www.youtube.com/watch?v=a41icW_FtsI", "ghibli": "https://www.youtube.com/watch?v=YjohMzHkBqI", "samurai": "https://www.youtube.com/watch?v=jrTMMG0zJyI", "violin": "https://www.youtube.com/watch?v=jvipPYFebWc&start_radio=1&list=RDMzT1XwmFnIup_KYXuc2rUZA","chill": "https://www.youtube.com/watch?v=G2WneYqu-ao","glitch": "https://www.youtube.com/watch?v=52Qug_siqKw"}
         profile.save()
     mus = profile.music
     words = act.split()
@@ -566,8 +589,13 @@ def affirmation():
         print(random.choice(nice))
 
 def maps():
+    l = requests.get('http://api.open-notify.org/iss-now.json')
+    loc = l.json()
+    lat = float(loc["iss_position"]["latitude"])
+    lon = float(loc["iss_position"]["longitude"])
     # miller projection
     map = Basemap(projection='mill',lon_0=180)
+    map.etopo(scale=0.5, alpha=0.5)
     # plot coastlines, draw label meridians and parallels.
     map.drawcoastlines()
     map.drawparallels(np.arange(-90,90,30),labels=[1,0,0,0])
@@ -579,6 +607,9 @@ def maps():
     # map shows through. Use current time in UTC.
     date = datetime.utcnow()
     CS=map.nightshade(date)
+    x, y = map(lon, lat)
+    plt.plot(x, y, 'or', markersize=5)
+    plt.text(x, y, ' ISS', fontsize=12, color='red')
     plt.title('Day/Night Map for %s (UTC)' % date.strftime("%d %b %Y %H:%M:%S"))
     plt.show()
 
@@ -611,6 +642,28 @@ def new_user():
             print("Let me know if you want to add a new user later") 
             return False
 
+def change_user():
+    global user
+    user = None
+    print("I'm sorry! Remind me who you are? ")
+    while (True):
+        print("I know: ")
+        profile.list_users()
+        username = input("I am: ")
+        username = username.lower()
+        user = profile.get_user(username)
+        if (user == None):
+            print("I don't know who that is yet. \nPlease enter one of the usernames listed or type 'new'")
+        elif "new" in username:
+            break
+        else:
+            print("Hi " + user["name"] + "!")
+            if yes_no("Are you the new default user?"):
+                profile.set_default(username)
+                print(user["name"] + " is now the default user!")
+            return False
+    if "new" in username:
+        new_user()
 
 
 

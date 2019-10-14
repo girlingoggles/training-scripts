@@ -40,7 +40,7 @@ class Profile:
 
         username.lower()
         if (self.profiles[username] != None):
-            self.defaultUser = username
+            self.defaultuser = username
             self.save()
         else:
             return False
