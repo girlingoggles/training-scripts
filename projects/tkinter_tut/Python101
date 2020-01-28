@@ -1,0 +1,115 @@
+ #!/usr/bin/env python3 
+	^^can use #!/usr/bin/python3 but some people have different types of python they use (ie virtual environments), etc.
+
+imports:
+import <xyz>   <--imports a library module you already have installed on your system. Will error out if <xyz> is not installed
+import <xyz> as <abc>    <--imports the library as the name you give it, for convenience/comprehension
+from <xyz> import <e>    <--only import this/these functions from <xyz> library
+
+
+var_a = whatever   
+	^^global variables go here. Variables within functions only exist within that function (local) unless passed around, but global variables can be included in any function using     global var_a
+
+
+*Programming is case-sensitive. A =/= a
+----------------------------------------------------------------------
+example:
+
+import tkinter as tk
+from math import pi
+import matplotlib.pyplot as plt
+
+
+r  = input("What is the radius? ")    <-- input() takes a user's input as a string when program is command line based
+r = float(r)                           <-- casts a numerical string into a float. int() for integer.
+area = pi * (r**2)                     <-- uses pi and your input in an equation
+ 
+print("Area is " + area)               <-- uses a string and variable to output answer, can format strings, etc
+
+data structures:
+lists--  enclosed in brackets, one of the most common data structures, kind of 1D arrays, but can have list of lists. You can add an element to an index, remove an element, sort, reverse, etc--> l = [1, 2, "a"]
+^^ l[0] --> 1st item in list. l[-1] --> last item in list.  l[1:10] --> 2nd item to 10th item (index [9]), does not include item at index [10]. l[3:] --> 4th element to the last element. l[:4] --> first element to 4th element (at index [3]) 
+dictionaries-- are enclosed in curly brackets and have key-value pairs. You can repeat values, but not keys   -->  d = {"a":1, "b":2}
+^^ d["a"] == 1   d["a"]=5 --> reassigns 5 as a value to "a"
+tuples--  in parentheses, are similar to lists but faster manipulation, tuples are immutable -->  (1, 2, "a")
+sets--  built-in set() function, sets are iterable and cannot have duplicates, each entry is unique in the set.  --> set([1, 2, 3])
+example of how set logic works:
+a = set([1, 2, 3])
+b = set([2, 3, 4, 5])
+a | b (union)--> (1,2,3,4,5) 
+a & b (intersect)--> (2, 3)
+
+all data structure types have their own methods, ie l.append(thing) adds item at the end of a list, 
+
+
+Flow control:
+for x in range(10):
+	if x in (1, 2, 3):
+		print("Hello")
+	elif x in (4, 5, 6):
+		print("Thank you")
+	else:
+		print("Good Bye")
+
+^^^Moved to Jupyter notebook to better show examples
+
+------------------------------------------------------------------------------------
+
+Functions:
+a function is a callable method that accepta parameters
+
+def do_a_thing(action):
+	if action == "exit":
+		exit()
+	elif action == "words":
+		print("We put words here")
+	elif action == "add":
+		a = input("First number: ")
+		b = input("Second number: ")
+		print(a+b)
+
+
+Usually if you have a more complex program, or are writing a program that can be used as a library/module, at the very bottom you write
+if __name__ == __main__:
+	main() #or whatever function your program starts at
+^^^this sets __name__ to main so it knows you are not using it as a module. If you are using it as a module, it ditches the .py and treats it differently. 
+Im still a bit fuzzy on the specifics, because I have only ever made one external module, with Kyles help.  
+
+A good explanation of 
+if __name__ == __main__:
+https://stackoverflow.com/questions/419163/what-does-if-name-main-do
+https://thepythonguru.com/what-is-if-__name__-__main__/
+
+
+
+
+python3 cheat sheet:
+https://perso.limsi.fr/pointal/_media/python:cours:mementopython3-english.pdf
+
+Some python3 tutorials: 
+https://www.python-course.eu/python3_course.php
+https://www.learnpython.org/   <--Interactive!
+
+online Python consoles, for playing:
+cloudcrunch.nz   <-- Made by Hamish! Uses online cloud JupyterLab, where you can test snippets of code, etc, without writing entire programs. Also good for data processing.
+https://www.pythonanywhere.com/  <--online python console, good for playing and sharing. can run entire programs (unsure if gui programs work, haven't tested it)
+
+
+tkinter:
+decent tutorial: 
+https://likegeeks.com/python-gui-examples-tkinter-tutorial/
+
+import tkinter as tk
+from tkinter.filedialog import askopenfilename
+
+root = tk.Tk()                          <-- root or master are common variable names here
+root.title("GUI window")                <-- is the title at the top of your program. Can be set to anything, or variable
+
+tk.Label(root, text-"words").grid(row = 0, column = 0, sticky = tk.NW, padx = 5)
+	^^is a line/lines of text on the gui background. grid is one way to layout the gui window. .pack() is another. .pack() is simpler but gives less layout control overall.  
+
+input_field = tk.Entry(root)             <-- is a one-line text-entry box. Can change its width, and get the input.
+
+input_field.grid(row=2, text='you can write stuff here too')
+
+
